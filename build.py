@@ -5,7 +5,7 @@ Usage:  python3 build.py
 Edit LINKS below to swap official URLs for affiliate links: every page updates.
 Articles live in content.py.
 """
-import datetime, html, json, pathlib
+import datetime, html, json, pathlib, re
 
 from content import ARTICLES
 
@@ -38,12 +38,29 @@ LINKS = {
     "Grammarly":   {"url": "https://www.grammarly.com","aff": False},
 }
 
-LOGO_SVG = ('<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">'
-            '<path d="M9 3h14c0 7-2.6 11.5-7 12.3C11.6 14.5 9 10 9 3z" fill="#6b1d2a"/>'
-            '<path d="M16 15.3V26M10.5 28.5h11" stroke="#1f1a17" stroke-width="2" stroke-linecap="round"/>'
-            '<circle cx="16" cy="8" r="1.8" fill="#c9a24a"/><path d="M12.5 8h1.7M17.8 8h1.7" stroke="#c9a24a" stroke-width="1.3"/>'
+LOGO_SVG = ('<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true">'
+            '<path d="M9 3h14c0 7-2.6 11.5-7 12.3C11.6 14.5 9 10 9 3z" fill="#7b1e2c"/>'
+            '<path d="M9.6 6.2h12.8" stroke="#d8bf8a" stroke-width=".8"/>'
+            '<path d="M16 15.3V26M10.5 28.5h11" stroke="#d8bf8a" stroke-width="1.8" stroke-linecap="round"/>'
             '</svg>')
 FAVICON = "data:image/svg+xml," + LOGO_SVG.replace('"', "'").replace("#", "%23").replace('aria-hidden=\'true\'', "xmlns='http://www.w3.org/2000/svg'")
+FONTS = '<link rel="preconnect" href="https://fonts.bunny.net"><link rel="stylesheet" href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i,500,600|manrope:400,500,600&display=swap">'
+
+# Monogram seals stand in for vendor logos (we do not reproduce trademarks).
+SEAL_COLORS = ["#7b1e2c", "#2f4a3a", "#3b3561", "#6a4a1e", "#24485e", "#5b2448", "#4a3b2a", "#2d4f4f"]
+
+
+def slug(name):
+    return re.sub(r"[^a-z0-9]+", "-", name.lower().replace(".", "").replace(";", "")).strip("-")
+
+
+def seal(name, size=None):
+    letters = re.sub(r"[^A-Za-z]", "", name.split(".")[0])
+    second = next((c for c in letters[1:] if c.isupper()), letters[1] if len(letters) > 1 else "")
+    initials = (letters[0].upper() + second.lower()) if second else letters.upper()
+    color = SEAL_COLORS[sum(map(ord, name)) % len(SEAL_COLORS)]
+    st = f"--c:{color}" + (f";--s:{size}px" if size else "")
+    return f'<span class="seal" style="{st}" aria-hidden="true">{initials}</span>'
 
 
 def link(name, text=None, cls=None):
@@ -55,7 +72,7 @@ def link(name, text=None, cls=None):
 
 
 def page(title, description, path, body, schema=None):
-    canonical = f"{SITE}/{path}".rstrip("/") + ("/" if path in ("",) else "")
+    canonical = f"{SITE}/{path}"
     ld = f'<script type="application/ld+json">{json.dumps(schema)}</script>' if schema else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -64,32 +81,35 @@ def page(title, description, path, body, schema=None):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(description)}">
+<meta name="theme-color" content="#150c0f">
 <link rel="canonical" href="{canonical}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{NAME}">
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(description)}">
 <meta property="og:url" content="{canonical}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{SITE}/assets/linkedin-banner.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{FAVICON}">
+{FONTS}
 <link rel="stylesheet" href="/assets/style.css">
 {ld}
 </head>
 <body>
 <header class="site-header"><div class="wrap">
-  <a class="logo" href="/">{LOGO_SVG}<span>The Tool <b>Sommelier</b></span></a>
-  <nav><a href="/#guides">Guides</a><a href="/about.html" class="hide-sm">How we pick</a><a href="/disclosure.html">Disclosure</a></nav>
+  <a class="logo" href="/">{LOGO_SVG}<span class="logo-word">The Tool <i>Sommelier</i></span></a>
+  <nav class="main"><a href="/#guides">Guides</a><a href="/about.html" class="hide-sm">How we pick</a><a href="/disclosure.html">Disclosure</a></nav>
 </div></header>
 <main>
 {body}
 </main>
 <footer><div class="wrap">
   <div class="cols">
-    <div><strong>{NAME}</strong><br>{TAGLINE}</div>
-    <div><a href="/about.html">How we pick</a><br><a href="/disclosure.html">Affiliate disclosure</a></div>
-    <div><a href="/privacy.html">Privacy</a><br><a href="/legal.html">Legal notice</a></div>
+    <div><p class="brand">The Tool Sommelier</p><p>{TAGLINE}<br>Independent comparisons of AI software, written for people who have a job to do.</p></div>
+    <div><a href="/#guides">All guides</a><a href="/about.html">How we pick</a><a href="mailto:contact@toolsommelier.com">Contact</a></div>
+    <div><a href="/disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/legal.html">Legal notice</a></div>
   </div>
-  <p class="small">Some links on this site are affiliate links: if you buy through them we may earn a commission, at no extra cost to you. It never changes our rankings. Product names and logos belong to their respective owners; ElevenLabs is a trademark of Eleven Labs Inc. &copy; {TODAY.year} {NAME}.</p>
+  <p class="fine">Some links on this site are affiliate links: if you subscribe through them we may earn a commission, at no extra cost to you. It never changes our rankings. Product names belong to their respective owners; ElevenLabs is a trademark of Eleven Labs Inc. &copy; {TODAY.year} {NAME}.</p>
 </div></footer>
 </body>
 </html>
@@ -98,53 +118,67 @@ def page(title, description, path, body, schema=None):
 
 def render_article(a):
     picks_html = ""
-    for i, p in enumerate(a["picks"], 1):
+    toc = ['<a href="#at-a-glance">At a glance</a>']
+    for p in a["picks"]:
         pros = "".join(f"<li>{x}</li>" for x in p["pros"])
         cons = "".join(f"<li>{x}</li>" for x in p["cons"])
+        toc.append(f'<a href="#{slug(p["tool"])}">{p["tool"]}</a>')
+        best = p['best_for'][0].lower() + p['best_for'][1:]
         picks_html += f"""
-<div class="pick" id="{p['tool'].lower().replace('.', '').replace(';', '').replace(' ', '-')}">
-  <div class="rank">#{i} · {p['label']}</div>
-  <h3>{p['tool']}</h3>
-  <p class="best-for"><strong>Best for:</strong> {p['best_for']}</p>
-  <p class="tasting">Tasting note: {p['note']}</p>
-  <p>{p['body']}</p>
-  <div class="pros-cons"><div><strong>Why we like it</strong><ul>{pros}</ul></div>
-  <div><strong>Watch out for</strong><ul>{cons}</ul></div></div>
-  {link(p['tool'], f"Try {p['tool']} →", "btn small")}
-</div>"""
+<section class="pick" id="{slug(p['tool'])}">
+  {seal(p['tool'])}
+  <div>
+    <p class="rank">{p['label']}</p>
+    <h3>{p['tool']}</h3>
+    <p class="best-for">Best for {best}. Free option: {p['free'][0].lower() + p['free'][1:]}.</p>
+    <p class="tasting">{p['note']}</p>
+    <p>{p['body']}</p>
+    <div class="pros-cons"><div><strong>Why we like it</strong><ul>{pros}</ul></div>
+    <div><strong>Watch out for</strong><ul>{cons}</ul></div></div>
+    {link(p['tool'], f"Visit {p['tool']}", "btn ink")}
+  </div>
+</section>"""
+    for h, _ in a.get("extra", []):
+        toc.append(f'<a href="#{slug(h)}">{h}</a>')
+    toc += ['<a href="#how-to-choose">How to choose</a>', '<a href="#faq">FAQ</a>']
 
     rows = "".join(
-        f"<tr><td><strong>{p['tool']}</strong></td><td>{p['best_for']}</td><td>{p['free']}</td><td>{link(p['tool'], 'Visit site')}</td></tr>"
+        f"<tr><td><span class=\"tcell\">{seal(p['tool'], 34)}{p['tool']}</span></td><td>{p['best_for']}</td><td>{p['free']}</td><td>{link(p['tool'], 'Visit')}</td></tr>"
         for p in a["picks"])
     table = f"""<div class="table-scroll"><table class="compare">
 <tr><th>Tool</th><th>Best for</th><th>Free option</th><th></th></tr>{rows}</table></div>
-<p class="meta">Plans and prices change often. Always check the official pricing page before you buy.</p>"""
+<p class="small-note">Plans and prices change often. Check the official pricing page before you buy.</p>"""
 
     faq_html = "".join(f"<h3>{q}</h3><p>{ans}</p>" for q, ans in a["faq"])
-    sections = "".join(f"<h2>{h}</h2>{b}" for h, b in a.get("extra", []))
+    sections = "".join(f'<h2 id="{slug(h)}">{h}</h2>{b}' for h, b in a.get("extra", []))
+    seals = "".join(seal(p["tool"]) for p in a["picks"])
 
     body = f"""
-<div class="wrap narrow">
-<div class="article-head">
-  <div class="crumbs"><a href="/">Home</a> › <a href="/#guides">Guides</a></div>
+<div class="wrap">
+<div class="article-top">
+  <div class="crumbs"><a href="/">Home</a> / <a href="/#guides">Guides</a></div>
   <h1>{a['h1']}</h1>
-  <div class="meta">Updated {TODAY.strftime('%B %Y')} · {a['read']} min read</div>
-  <div class="disclosure-box">We may earn a commission if you sign up through our links, at no extra cost to you. <a href="/disclosure.html">Learn more</a>.</div>
+  <p class="standfirst">{a['description']}</p>
+  <div class="seals">{seals}</div>
+  <div class="meta">Updated {TODAY.strftime('%B %Y')}, {a['read']} min read</div>
 </div>
+</div>
+<div class="paper"><div class="wrap"><div class="paper-grid">
+<nav class="toc" aria-label="On this page"><strong>On this page</strong>{''.join(toc)}</nav>
 <article>
+<p class="notice">We may earn a commission if you sign up through our links, at no extra cost to you. <a href="/disclosure.html">How this works</a>.</p>
 {a['intro']}
 <div class="verdict"><h2>The short answer</h2>{a['verdict']}</div>
-<h2>At a glance</h2>
+<h2 id="at-a-glance">At a glance</h2>
 {table}
-<h2>Our picks, in detail</h2>
 {picks_html}
 {sections}
-<h2>How to choose</h2>
+<h2 id="how-to-choose">How to choose</h2>
 {a['how_to_choose']}
-<div class="faq"><h2>FAQ</h2>{faq_html}</div>
-<p class="meta">Our rankings are based on each tool's official documentation, published plans and independent user reviews. <a href="/about.html">How we pick</a>.</p>
+<div class="faq"><h2 id="faq">FAQ</h2>{faq_html}</div>
+<p class="small-note">Our rankings are based on each tool's official documentation, published plans and independent user reviews. <a href="/about.html">How we pick</a>.</p>
 </article>
-</div>"""
+</div></div></div>"""
 
     schema = {
         "@context": "https://schema.org",
@@ -160,32 +194,51 @@ def render_article(a):
     return page(a["title"], a["description"], f"{a['slug']}.html", body, schema)
 
 
+CARTE = [
+    ("A voiceover that sounds human", "ElevenLabs", "best-ai-voice-generators.html#elevenlabs"),
+    ("Training videos, no camera", "Synthesia", "best-ai-video-generators.html#synthesia"),
+    ("Your face, in any language", "HeyGen", "synthesia-vs-heygen.html#heygen"),
+    ("Meeting notes for free", "Fathom", "best-ai-meeting-note-takers.html#fathom"),
+    ("Edit a podcast like a doc", "Descript", "best-ai-voice-generators.html#descript"),
+    ("On-brand marketing copy", "Jasper", "best-ai-writing-tools.html#jasper"),
+]
+
+
 def render_home():
-    cards = "".join(f"""
-<a class="card" href="/{a['slug']}.html"><div class="tag">{a['category']}</div>
-<h3>{a['h1']}</h3><p>{a['description']}</p><span class="more">Read the guide →</span></a>"""
-                    for a in ARTICLES)
+    carte = "".join(f'<li><a href="/{href}"><span class="job">{job}</span><span class="leader"></span><span class="tool">{tool}</span></a></li>'
+                    for job, tool, href in CARTE)
+    cards = ""
+    for i, a in enumerate(ARTICLES):
+        seals = "".join(seal(p["tool"]) for p in a["picks"][:4])
+        cls = "label feature" if i < 2 else "label"
+        cards += f"""
+<a class="{cls}" href="/{a['slug']}.html"><div class="seals">{seals}</div>
+<p class="kind">{a['category']}</p><h3>{a['h1']}</h3><p>{a['description']}</p><span class="open">Read the guide</span></a>"""
     body = f"""
 <div class="wrap hero">
-  <span class="eyebrow">AI tools, pairing advice</span>
-  <h1>Find the AI tool that <em>fits your job</em>, not the hype.</h1>
-  <p>A sommelier doesn't pour you the most expensive bottle. They pour the right one. We do the same with AI tools: clear comparisons, honest trade-offs, no fluff.</p>
-  <a class="btn" href="#guides">Browse the guides</a>
-</div>
-<section id="guides"><div class="wrap">
-  <h2 class="section-title">Pairing guides</h2>
-  <p class="section-sub">Side-by-side comparisons for the jobs people actually hire AI for.</p>
-  <div class="grid">{cards}</div>
-</div></section>
-<section><div class="wrap">
-  <h2 class="section-title">How we pick</h2>
-  <p class="section-sub">Three questions, every time.</p>
-  <div class="steps">
-    <div class="step"><strong>1. What's the job?</strong><span>We start from the task (a voiceover, a meeting recap, a training video), not from the tool.</span></div>
-    <div class="step"><strong>2. What does it really cost?</strong><span>Free plans, limits, and the plan most people actually need.</span></div>
-    <div class="step"><strong>3. Who is it for?</strong><span>A solo creator and a 500-person company rarely need the same tool.</span></div>
+  <div>
+    <h1>Every job has its perfect AI pairing.</h1>
+    <p class="lede">A sommelier doesn't pour the most expensive bottle. They pour the right one. We compare AI tools the same way: by the job you need done.</p>
+    <div class="hero-actions"><a class="btn" href="#guides">Browse the guides</a><a class="btn quiet" href="/about.html">How we pick</a></div>
   </div>
-  <p style="margin-top:22px"><a href="/about.html">Read our full method →</a></p>
+  <div class="carte">
+    <h2>Tonight's pairings</h2>
+    <p class="sub">What you need, and what to pour</p>
+    <ol>{carte}</ol>
+    <p class="foot">Tap a pairing to read why.</p>
+  </div>
+</div>
+<section class="section" id="guides"><div class="wrap">
+  <div class="section-head"><h2>The cellar</h2><p>In-depth comparisons for the jobs people actually hire AI for: voice, video, meetings and writing.</p></div>
+  <div class="cellar">{cards}</div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>How we choose a pairing</h2><p>The same three questions behind every recommendation.</p></div>
+  <div class="method">
+    <div><h3>What's the job?</h3><p>We start from the task, a voiceover, a meeting recap, a training video, never from the tool.</p></div>
+    <div><h3>What does it really cost?</h3><p>Free plans, limits, and the plan most people end up needing.</p></div>
+    <div><h3>Who is it for?</h3><p>A solo creator and a 500-person company rarely need the same tool.</p></div>
+  </div>
 </div></section>"""
     schema = {"@context": "https://schema.org", "@type": "WebSite", "name": NAME, "url": SITE + "/",
               "description": TAGLINE}
@@ -194,9 +247,10 @@ def render_home():
                 "", body, schema)
 
 
-def simple(title, slug, description, inner):
-    body = f'<div class="wrap narrow"><div class="article-head"><h1>{title}</h1></div><article>{inner}</article></div>'
-    return page(f"{title} | {NAME}", description, f"{slug}.html", body)
+def simple(title, slug_, description, inner):
+    body = (f'<div class="wrap"><div class="article-top"><h1>{title}</h1></div></div>'
+            f'<div class="paper simple"><div class="wrap"><div class="paper-grid"><article>{inner}</article></div></div></div>')
+    return page(f"{title} | {NAME}", description, f"{slug_}.html", body)
 
 
 ABOUT = """
@@ -226,6 +280,8 @@ PRIVACY = """
 <p>This website does not ask you to create an account and does not collect your name, email address or payment information.</p>
 <h2>Hosting</h2>
 <p>The site is hosted by GitHub Pages (GitHub, Inc.). Like any web host, GitHub may log technical data such as your IP address for security purposes. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="nofollow noopener" target="_blank">GitHub's privacy statement</a>.</p>
+<h2>Fonts</h2>
+<p>Our typefaces are served by Bunny Fonts (BunnyWay d.o.o., EU), a privacy-focused font service that does not use cookies or track visitors.</p>
 <h2>Cookies</h2>
 <p>We do not set advertising or tracking cookies. When you click an outbound link to a software vendor, that vendor's own website may set cookies (including affiliate tracking cookies) under its own privacy policy.</p>
 <h2>Your rights</h2>
