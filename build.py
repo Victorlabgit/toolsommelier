@@ -49,6 +49,18 @@ FONTS = '<link rel="preconnect" href="https://fonts.bunny.net"><link rel="styles
 # Monogram seals stand in for vendor logos (we do not reproduce trademarks).
 SEAL_COLORS = ["#7b1e2c", "#2f4a3a", "#3b3561", "#6a4a1e", "#24485e", "#5b2448", "#4a3b2a", "#2d4f4f"]
 
+SOCIALS = [
+    ("Instagram", "https://www.instagram.com/toolsommelier/", '<path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM12 3.6c2.7 0 3 0 4.1.1 2.7.1 4 1.4 4.1 4.1.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 2.7-1.4 4-4.1 4.1-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-2.7-.1-4-1.4-4.1-4.1C3.7 15 3.7 14.7 3.7 12s0-3 .1-4.1C3.9 5.2 5.2 3.9 7.9 3.8 9 3.7 9.3 3.6 12 3.6zM12 2c-2.7 0-3.1 0-4.1.1C4.2 2.2 2.2 4.2 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-3.7-2.1-5.7-5.8-5.8C15.1 2 14.7 2 12 2z"/>'),
+    ("LinkedIn", "https://www.linkedin.com/company/147035173/", '<path d="M20.4 2H3.6C2.7 2 2 2.7 2 3.6v16.8c0 .9.7 1.6 1.6 1.6h16.8c.9 0 1.6-.7 1.6-1.6V3.6c0-.9-.7-1.6-1.6-1.6zM8 19H5V9.5h3V19zM6.5 8.2a1.7 1.7 0 1 1 0-3.5 1.7 1.7 0 0 1 0 3.5zM19 19h-3v-4.6c0-1.1 0-2.5-1.5-2.5s-1.8 1.2-1.8 2.4V19h-3V9.5h2.9v1.3c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.6 2 3.6 4.6V19z"/>'),
+    ("Facebook", "https://www.facebook.com/profile.php?id=61597053747157", '<path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/>'),
+]
+
+
+def social_links(cls="socials"):
+    return f'<div class="{cls}">' + "".join(
+        f'<a href="{u}" target="_blank" rel="noopener me" aria-label="{n}" title="{n}"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">{d}</svg></a>'
+        for n, u, d in SOCIALS) + "</div>"
+
 
 def slug(name):
     return re.sub(r"[^a-z0-9]+", "-", name.lower().replace(".", "").replace(";", "")).strip("-")
@@ -98,7 +110,7 @@ def page(title, description, path, body, schema=None):
 <body>
 <header class="site-header"><div class="wrap">
   <a class="logo" href="/">{LOGO_SVG}<span class="logo-word">The Tool <i>Sommelier</i></span></a>
-  <nav class="main"><a href="/#guides">Guides</a><a href="/blog/">Journal</a><a href="/about.html">How we pick</a></nav>
+  <nav class="main"><a href="/#guides">Guides</a><a href="/blog/">Journal</a><a href="/about.html" class="hide-sm">How we pick</a>{social_links("socials head hide-sm")}</nav>
 </div></header>
 <main>
 <div class="subscribed-banner" id="subscribed" hidden><div class="wrap">You're in. Welcome to The Weekly Pairing: your first email is on its way.</div></div>
@@ -107,7 +119,7 @@ def page(title, description, path, body, schema=None):
 </main>
 <footer><div class="wrap">
   <div class="cols">
-    <div><p class="brand">The Tool Sommelier</p><p>{TAGLINE}<br>Independent comparisons of AI software, written for people who have a job to do.</p></div>
+    <div><p class="brand">The Tool Sommelier</p><p>{TAGLINE}<br>Independent comparisons of AI software, written for people who have a job to do.</p><p class="follow">Follow the cellar</p>{social_links()}</div>
     <div><a href="/#guides">All guides</a><a href="/blog/">The Journal</a><a href="/about.html">How we pick</a><a href="mailto:contact@toolsommelier.com">Contact</a></div>
     <div><a href="/disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/legal.html">Legal notice</a></div>
   </div>
@@ -264,8 +276,10 @@ def render_home():
     <div><h3>Who is it for?</h3><p>A solo creator and a 500-person company rarely need the same tool.</p></div>
   </div>
 </div></section>"""
-    schema = {"@context": "https://schema.org", "@type": "WebSite", "name": NAME, "url": SITE + "/",
-              "description": TAGLINE}
+    schema = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebSite", "name": NAME, "url": SITE + "/", "description": TAGLINE},
+        {"@type": "Organization", "name": NAME, "url": SITE + "/", "logo": SITE + "/assets/logo.png",
+         "sameAs": [u for _, u, _ in SOCIALS]}]}
     return page(f"{NAME}: AI tool comparisons, perfectly paired",
                 "Honest, side-by-side comparisons of AI tools for voice, video, meetings and writing. Find the right AI tool for your job.",
                 "", body, schema)
