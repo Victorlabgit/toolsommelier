@@ -315,6 +315,8 @@ def main():
     (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     (out / "CNAME").write_text("toolsommelier.com\n", encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")
+    # Google Search Console ownership file: never delete
+    (out / "googlebe370e82df618218.html").write_text("google-site-verification: googlebe370e82df618218.html", encoding="utf-8")
     print(f"Built {len(pages)} pages.")
 
 
