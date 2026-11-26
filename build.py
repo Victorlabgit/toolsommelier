@@ -8,6 +8,7 @@ Articles live in content.py.
 import datetime, html, json, pathlib, re
 
 from content import ARTICLES
+from blog import POSTS
 
 SITE = "https://toolsommelier.com"
 NAME = "The Tool Sommelier"
@@ -95,7 +96,7 @@ def page(title, description, path, body, schema=None):
 <body>
 <header class="site-header"><div class="wrap">
   <a class="logo" href="/">{LOGO_SVG}<span class="logo-word">The Tool <i>Sommelier</i></span></a>
-  <nav class="main"><a href="/#guides">Guides</a><a href="/about.html" class="hide-sm">How we pick</a><a href="/disclosure.html">Disclosure</a></nav>
+  <nav class="main"><a href="/#guides">Guides</a><a href="/blog/">Journal</a><a href="/about.html" class="hide-sm">How we pick</a><a href="/disclosure.html">Disclosure</a></nav>
 </div></header>
 <main>
 {body}
@@ -103,7 +104,7 @@ def page(title, description, path, body, schema=None):
 <footer><div class="wrap">
   <div class="cols">
     <div><p class="brand">The Tool Sommelier</p><p>{TAGLINE}<br>Independent comparisons of AI software, written for people who have a job to do.</p></div>
-    <div><a href="/#guides">All guides</a><a href="/about.html">How we pick</a><a href="mailto:contact@toolsommelier.com">Contact</a></div>
+    <div><a href="/#guides">All guides</a><a href="/blog/">The Journal</a><a href="/about.html">How we pick</a><a href="mailto:contact@toolsommelier.com">Contact</a></div>
     <div><a href="/disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/legal.html">Legal notice</a></div>
   </div>
   <p class="fine">Some links on this site are affiliate links: if you subscribe through them we may earn a commission, at no extra cost to you. It never changes our rankings. Product names belong to their respective owners; ElevenLabs is a trademark of Eleven Labs Inc. &copy; {TODAY.year} {NAME}.</p>
@@ -202,6 +203,10 @@ CARTE = [
 
 
 def render_home():
+    latest = sorted(POSTS, key=lambda p: p["date"], reverse=True)[:3]
+    journal = (f'<section class="section"><div class="wrap"><div class="section-head"><h2>From the Journal</h2>'
+               f'<p>Quick answers to the questions people ask before they choose. <a href="/blog/">All notes</a></p></div>'
+               f'<div class="post-grid">{"".join(post_card(p) for p in latest)}</div></div></section>') if latest else ""
     carte = "".join(f'<li><a href="/{href}"><span class="job">{job}</span><span class="leader"></span><span class="tool">{tool}</span></a></li>'
                     for job, tool, href in CARTE)
     cards = ""
@@ -229,6 +234,7 @@ def render_home():
   <div class="section-head"><h2>The cellar</h2><p>In-depth comparisons for the jobs people actually hire AI for: voice, video, meetings and writing.</p></div>
   <div class="cellar">{cards}</div>
 </div></section>
+{journal}
 <section class="section"><div class="wrap">
   <div class="section-head"><h2>How we choose a pairing</h2><p>The same three questions behind every recommendation.</p></div>
   <div class="method">
@@ -242,6 +248,100 @@ def render_home():
     return page(f"{NAME}: AI tool comparisons, perfectly paired",
                 "Honest, side-by-side comparisons of AI tools for voice, video, meetings and writing. Find the right AI tool for your job.",
                 "", body, schema)
+
+
+# ---------------------------------------------------------------------------
+# Blog ("The Journal")
+# ---------------------------------------------------------------------------
+GUIDES = {a["slug"]: a for a in ARTICLES}
+
+
+def fmt_date(iso):
+    d = datetime.date.fromisoformat(iso)
+    return f"{d.strftime('%B')} {d.day}, {d.year}"
+
+
+def tool_links(text):
+    def rep(m):
+        name, _, label = m.group(1).partition("|")
+        return link(name.strip(), label.strip() or None)
+    return re.sub(r"\{\{tool:([^}]+)\}\}", rep, text)
+
+
+def post_card(p):
+    seals = "".join(seal(t, 40) for t in p["tools"][:3])
+    return (f'<a class="post-card" href="/blog/{p["slug"]}.html"><div class="seals">{seals}</div>'
+            f'<p class="kind">{p["category"]} &middot; {fmt_date(p["date"])}</p><h3>{p["h1"]}</h3>'
+            f'<p>{p["description"]}</p><span class="open">Read the note</span></a>')
+
+
+def render_post(p):
+    g = GUIDES[p["guide"]]
+    others = [q for q in POSTS if q["slug"] != p["slug"]]
+    others.sort(key=lambda q: q["date"], reverse=True)
+    related = sorted(others, key=lambda q: q["guide"] != p["guide"])[:3]
+    related_html = "".join(f'<li><a href="/blog/{q["slug"]}.html">{q["h1"]}</a></li>' for q in related)
+    faq_html = "".join(f"<h3>{q}</h3><p>{a}</p>" for q, a in p["faq"])
+    seals = "".join(seal(t) for t in p["tools"][:4])
+    body = f"""
+<div class="wrap">
+<div class="article-top">
+  <div class="crumbs"><a href="/">Home</a> / <a href="/blog/">Journal</a></div>
+  <h1>{p['h1']}</h1>
+  <p class="standfirst">{p['description']}</p>
+  <div class="seals">{seals}</div>
+  <div class="meta">{p['category']}, {fmt_date(p['date'])}, {p['read']} min read</div>
+</div>
+</div>
+<div class="paper simple"><div class="wrap"><div class="paper-grid">
+<article>
+<p class="notice">We may earn a commission if you sign up through our links, at no extra cost to you. <a href="/disclosure.html">How this works</a>.</p>
+<div class="verdict"><h2>The short answer</h2>{tool_links(p['answer'])}</div>
+{tool_links(p['body'])}
+{f'<div class="faq"><h2 id="faq">FAQ</h2>{faq_html}</div>' if p['faq'] else ''}
+<aside class="pairing-box">
+  <p class="kind">The full pairing</p>
+  <h2>{g['h1']}</h2>
+  <p>{g['description']}</p>
+  <a class="btn ink" href="/{g['slug']}.html">Read the guide</a>
+</aside>
+{f'<div class="more-notes"><h2>More from the Journal</h2><ul>{related_html}</ul></div>' if related_html else ''}
+</article>
+</div></div></div>"""
+    url = f"{SITE}/blog/{p['slug']}.html"
+    graph = [{"@type": "BlogPosting", "headline": p["h1"], "description": p["description"],
+              "datePublished": p["date"], "dateModified": p.get("updated", p["date"]),
+              "author": {"@type": "Organization", "name": NAME},
+              "publisher": {"@type": "Organization", "name": NAME, "logo": {"@type": "ImageObject", "url": f"{SITE}/assets/logo.png"}},
+              "mainEntityOfPage": url, "image": f"{SITE}/assets/linkedin-banner.png"},
+             {"@type": "BreadcrumbList", "itemListElement": [
+                 {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
+                 {"@type": "ListItem", "position": 2, "name": "Journal", "item": SITE + "/blog/"},
+                 {"@type": "ListItem", "position": 3, "name": p["h1"], "item": url}]}]
+    if p["faq"]:
+        graph.append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<[^>]+>", "", a)}}
+            for q, a in p["faq"]]})
+    return page(f"{p['title']} | {NAME}", p["description"], f"blog/{p['slug']}.html", body,
+                {"@context": "https://schema.org", "@graph": graph})
+
+
+def render_blog_index():
+    posts = sorted(POSTS, key=lambda p: p["date"], reverse=True)
+    cards = "".join(post_card(p) for p in posts)
+    body = f"""
+<div class="wrap">
+<div class="article-top">
+  <div class="crumbs"><a href="/">Home</a> / Journal</div>
+  <h1>The Journal</h1>
+  <p class="standfirst">Short, straight answers to the questions people ask before they pick an AI tool. Each note points to the full pairing guide.</p>
+</div>
+</div>
+<section class="section journal"><div class="wrap"><div class="post-grid">{cards}</div></div></section>"""
+    schema = {"@context": "https://schema.org", "@type": "Blog", "name": f"{NAME} Journal", "url": f"{SITE}/blog/"}
+    return page(f"The Journal: quick answers about AI tools | {NAME}",
+                "Short, honest answers to common questions about AI tools: free plans, pricing tiers, how-tos and comparisons for voice, video, meetings and writing.",
+                "blog/", body, schema)
 
 
 def simple(title, slug_, description, inner):
@@ -304,10 +404,15 @@ def main():
     pages["privacy.html"] = simple("Privacy policy", "privacy", "Privacy policy of The Tool Sommelier.", PRIVACY.format(date=TODAY.strftime('%B %d, %Y')))
     pages["legal.html"] = simple("Legal notice", "legal", "Legal notice (mentions légales) of The Tool Sommelier.", LEGAL)
     pages["404.html"] = simple("Page not found", "404", "Page not found.", '<p>This bottle is not in our cellar. <a href="/">Back to the guides →</a></p>')
+    pages["blog/index.html"] = render_blog_index()
+    for p in POSTS:
+        assert p["guide"] in GUIDES, f"unknown guide {p['guide']} in post {p['slug']}"
+        pages[f"blog/{p['slug']}.html"] = render_post(p)
+    (out / "blog").mkdir(exist_ok=True)
     for name, content in pages.items():
         (out / name).write_text(content, encoding="utf-8")
 
-    urls = [""] + [f"{a['slug']}.html" for a in ARTICLES] + ["about.html", "disclosure.html"]
+    urls = [""] + [f"{a['slug']}.html" for a in ARTICLES] + ["blog/"] + [f"blog/{p['slug']}.html" for p in POSTS] + ["about.html", "disclosure.html"]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sitemap += [f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY.isoformat()}</lastmod></url>" for u in urls]
     sitemap.append("</urlset>")
