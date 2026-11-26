@@ -99,6 +99,8 @@ def page(title, description, path, body, schema=None):
   <nav class="main"><a href="/#guides">Guides</a><a href="/blog/">Journal</a><a href="/about.html">How we pick</a></nav>
 </div></header>
 <main>
+<div class="subscribed-banner" id="subscribed" hidden><div class="wrap">You're in. Welcome to The Weekly Pairing: your first email is on its way.</div></div>
+<script>if(location.search.indexOf("subscribed=1")>-1){{document.getElementById("subscribed").hidden=false}}</script>
 {body}
 </main>
 <footer><div class="wrap">
@@ -112,6 +114,21 @@ def page(title, description, path, body, schema=None):
 </body>
 </html>
 """
+
+
+NEWSLETTER_FORM_ID = "355046cc-7ca6-4d5c-a011-d2f49d56e5b0"
+
+
+def newsletter_block(variant="dark"):
+    return f"""
+<aside class="newsletter {variant}" id="newsletter">
+  <div class="nl-copy">
+    <p class="kind">The Weekly Pairing</p>
+    <h2>One short email a week. The AI tools worth your time.</h2>
+    <p>New guides, honest picks and what changed in the tools you use. Free, no spam, unsubscribe in one click.</p>
+  </div>
+  <div class="nl-form"><script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="{NEWSLETTER_FORM_ID}"></script></div>
+</aside>"""
 
 
 def render_article(a):
@@ -175,6 +192,7 @@ def render_article(a):
 {a['how_to_choose']}
 <div class="faq"><h2 id="faq">FAQ</h2>{faq_html}</div>
 <p class="small-note">Our rankings are based on each tool's official documentation, published plans and independent user reviews. <a href="/about.html">How we pick</a>.</p>
+{newsletter_block()}
 </article>
 </div></div></div>"""
 
@@ -235,6 +253,7 @@ def render_home():
   <div class="cellar">{cards}</div>
 </div></section>
 {journal}
+<section class="section"><div class="wrap">{newsletter_block("home")}</div></section>
 <section class="section"><div class="wrap">
   <div class="section-head"><h2>How we choose a pairing</h2><p>The same three questions behind every recommendation.</p></div>
   <div class="method">
@@ -305,6 +324,7 @@ def render_post(p):
   <p>{g['description']}</p>
   <a class="btn ink" href="/{g['slug']}.html">Read the guide</a>
 </aside>
+{newsletter_block()}
 {f'<div class="more-notes"><h2>More from the Journal</h2><ul>{related_html}</ul></div>' if related_html else ''}
 </article>
 </div></div></div>"""
@@ -374,15 +394,17 @@ DISCLOSURE = """
 
 PRIVACY = """
 <p><em>Last updated: {date}</em></p>
-<p>This website does not ask you to create an account and does not collect your name, email address or payment information.</p>
+<p>This website does not ask you to create an account and does not collect payment information. The only personal data we collect is your email address, and only if you choose to subscribe to our newsletter.</p>
 <h2>Hosting</h2>
 <p>The site is hosted by GitHub Pages (GitHub, Inc.). Like any web host, GitHub may log technical data such as your IP address for security purposes. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="nofollow noopener" target="_blank">GitHub's privacy statement</a>.</p>
+<h2>Newsletter</h2>
+<p>If you subscribe to The Weekly Pairing, your email address is collected and stored by our newsletter provider, beehiiv (Beehiiv Inc., United States), which sends the emails on our behalf. We use it only to send you the newsletter. The legal basis is your consent (GDPR art. 6(1)(a)): you confirm your subscription by clicking a link in a confirmation email (double opt-in), and you can unsubscribe at any time with the link at the bottom of every email, after which your address is no longer used for sending. beehiiv may record whether emails are opened and links clicked, to help us understand what readers find useful. See <a href="https://www.beehiiv.com/privacy" rel="nofollow noopener" target="_blank">beehiiv's privacy policy</a>. The signup form on our pages is loaded from beehiiv's servers.</p>
 <h2>Fonts</h2>
 <p>Our typefaces are served by Bunny Fonts (BunnyWay d.o.o., EU), a privacy-focused font service that does not use cookies or track visitors.</p>
 <h2>Cookies</h2>
 <p>We do not set advertising or tracking cookies. When you click an outbound link to a software vendor, that vendor's own website may set cookies (including affiliate tracking cookies) under its own privacy policy.</p>
 <h2>Your rights</h2>
-<p>Under the GDPR you have the right to access, correct and delete personal data about you. Since we do not collect personal data ourselves, there is usually nothing to request; see our <a href="/legal.html">legal notice</a> for publisher and hosting details.</p>
+<p>Under the GDPR you have the right to access, correct and delete personal data about you. For newsletter subscribers, you can unsubscribe at any time or write to <a href="mailto:contact@toolsommelier.com">contact@toolsommelier.com</a> to have your address deleted. See our <a href="/legal.html">legal notice</a> for publisher and hosting details.</p>
 """
 
 LEGAL = """

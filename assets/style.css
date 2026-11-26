@@ -199,3 +199,17 @@ footer .fine{font-size:13px;margin-top:40px;padding-top:22px;border-top:1px soli
 .paper .pairing-box a.btn{color:var(--bone)}
 .more-notes{margin-top:40px}
 .more-notes h2{font-size:28px;margin:0 0 8px}
+
+/* newsletter */
+.newsletter{background:linear-gradient(160deg,#3a1520,var(--cellar-2) 70%);color:var(--bone);border:1px solid rgba(216,191,138,.25);
+  border-radius:var(--r-md);padding:34px 36px;margin:48px 0 0;display:grid;gap:18px}
+.newsletter .kind{font:italic 400 19px var(--display);color:var(--champagne);margin:0}
+.newsletter h2{font:500 30px/1.15 var(--display);color:var(--bone);margin:4px 0 8px}
+article .newsletter h2{margin:4px 0 8px;font-size:30px}
+.newsletter p{color:#d9cfc2;font-size:16px;margin:0}
+article .newsletter p{font-size:16px;line-height:1.6}
+.newsletter.home{grid-template-columns:1.1fr 1fr;align-items:center;gap:40px;padding:44px 48px;margin:0}
+.newsletter.home h2{font-size:38px}
+@media(max-width:800px){.newsletter.home{grid-template-columns:1fr;padding:30px 26px}}
+.nl-form{min-height:60px}
+.subscribed-banner{background:var(--oxblood);color:var(--bone);padding:14px 0;font-size:15px;text-align:center}
