@@ -211,7 +211,7 @@ ABOUT = """
 <h2>How we make money</h2>
 <p>Some links are affiliate links. If you subscribe through them, the vendor may pay us a commission. You pay the same price. Commissions never decide a ranking: a tool with no affiliate program can, and does, rank first. See our <a href="/disclosure.html">affiliate disclosure</a>.</p>
 <h2>Spotted an error?</h2>
-<p>Prices and features move fast. We review every guide regularly and fix anything that has changed.</p>
+<p>Prices and features move fast. We review every guide regularly. Spotted something out of date? Write to <a href="mailto:contact@toolsommelier.com">contact@toolsommelier.com</a>.</p>
 """
 
 DISCLOSURE = """
@@ -233,7 +233,8 @@ PRIVACY = """
 """
 
 LEGAL = """
-<p><strong>Publisher:</strong> this website is published by a private individual (non-professional publisher) who, in accordance with Article 6-III-2 of the French law n°2004-575 of 21 June 2004 (LCEN), has chosen not to disclose their identity publicly. Their identification details have been provided to the hosting provider named below.</p>
+<p><strong>Publisher:</strong> this website is published by a private individual (non-professional publisher) who, in accordance with Article 6-III-2 of the French law n°2004-575 of 21 June 2004 (LCEN), has chosen not to disclose their identity publicly. Their identification details have been provided to the hosting provider named below.<br>
+<strong>Contact:</strong> <a href="mailto:contact@toolsommelier.com">contact@toolsommelier.com</a></p>
 <p><strong>Hosting:</strong> GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States. <a href="https://github.com" rel="nofollow noopener" target="_blank">github.com</a></p>
 <p><strong>Domain registrar:</strong> IONOS SARL, France.</p>
 <p>All content on this website is provided for general information. Prices and features of third-party tools may change without notice; always check the vendor's official website before buying.</p>
