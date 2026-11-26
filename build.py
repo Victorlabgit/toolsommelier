@@ -96,7 +96,7 @@ def page(title, description, path, body, schema=None):
 <body>
 <header class="site-header"><div class="wrap">
   <a class="logo" href="/">{LOGO_SVG}<span class="logo-word">The Tool <i>Sommelier</i></span></a>
-  <nav class="main"><a href="/#guides">Guides</a><a href="/blog/">Journal</a><a href="/about.html" class="hide-sm">How we pick</a><a href="/disclosure.html">Disclosure</a></nav>
+  <nav class="main"><a href="/#guides">Guides</a><a href="/blog/">Journal</a><a href="/about.html">How we pick</a></nav>
 </div></header>
 <main>
 {body}
@@ -107,7 +107,7 @@ def page(title, description, path, body, schema=None):
     <div><a href="/#guides">All guides</a><a href="/blog/">The Journal</a><a href="/about.html">How we pick</a><a href="mailto:contact@toolsommelier.com">Contact</a></div>
     <div><a href="/disclosure.html">Affiliate disclosure</a><a href="/privacy.html">Privacy</a><a href="/legal.html">Legal notice</a></div>
   </div>
-  <p class="fine">Some links on this site are affiliate links: if you subscribe through them we may earn a commission, at no extra cost to you. It never changes our rankings. Product names belong to their respective owners; ElevenLabs is a trademark of Eleven Labs Inc. &copy; {TODAY.year} {NAME}.</p>
+  <p class="fine">Some links are affiliate links; they never change our rankings. Product names belong to their respective owners; ElevenLabs is a trademark of Eleven Labs Inc. &copy; {TODAY.year} {NAME}.</p>
 </div></footer>
 </body>
 </html>
@@ -164,7 +164,7 @@ def render_article(a):
 <div class="paper"><div class="wrap"><div class="paper-grid">
 <nav class="toc" aria-label="On this page"><strong>On this page</strong>{''.join(toc)}</nav>
 <article>
-<p class="notice">We may earn a commission if you sign up through our links, at no extra cost to you. <a href="/disclosure.html">How this works</a>.</p>
+<p class="notice">Contains affiliate links. <a href="/disclosure.html">Disclosure</a></p>
 {a['intro']}
 <div class="verdict"><h2>The short answer</h2>{a['verdict']}</div>
 <h2 id="at-a-glance">At a glance</h2>
@@ -295,7 +295,7 @@ def render_post(p):
 </div>
 <div class="paper simple"><div class="wrap"><div class="paper-grid">
 <article>
-<p class="notice">We may earn a commission if you sign up through our links, at no extra cost to you. <a href="/disclosure.html">How this works</a>.</p>
+<p class="notice">Contains affiliate links. <a href="/disclosure.html">Disclosure</a></p>
 <div class="verdict"><h2>The short answer</h2>{tool_links(p['answer'])}</div>
 {tool_links(p['body'])}
 {f'<div class="faq"><h2 id="faq">FAQ</h2>{faq_html}</div>' if p['faq'] else ''}
