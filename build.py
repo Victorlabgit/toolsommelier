@@ -24,7 +24,7 @@ LINKS = {
     "Murf AI":     {"url": "https://murf.ai",         "aff": False},
     "Descript":    {"url": "https://www.descript.com","aff": False},
     "Speechify":   {"url": "https://speechify.com",   "aff": False},
-    "Synthesia":   {"url": "https://www.synthesia.io","aff": False},
+    "Synthesia":   {"url": "https://www.synthesia.io/?via=victor-wagner", "aff": True},
     "HeyGen":      {"url": "https://www.heygen.com",  "aff": False},
     "Pictory":     {"url": "https://pictory.ai",      "aff": False},
     "Runway":      {"url": "https://runwayml.com",    "aff": False},
