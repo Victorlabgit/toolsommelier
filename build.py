@@ -31,7 +31,7 @@ LINKS = {
     "Otter.ai":    {"url": "https://otter.ai",        "aff": False},
     "Fireflies.ai":{"url": "https://fireflies.ai/?fpr=victor-4901be", "aff": True},
     "Fathom":      {"url": "https://fathom.video",    "aff": False},
-    "tl;dv":       {"url": "https://tldv.io",         "aff": False},
+    "tl;dv":       {"url": "https://tldv.cello.so/XeSTTwlN4cX", "aff": True},
     "Jasper":      {"url": "https://www.jasper.ai",   "aff": False},
     "Copy.ai":     {"url": "https://www.copy.ai",     "aff": False},
     "Writesonic":  {"url": "https://writesonic.com",  "aff": False},
