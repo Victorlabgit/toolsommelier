@@ -15,6 +15,8 @@ NAME = "The Tool Sommelier"
 TAGLINE = "The right AI tool, perfectly paired to your job."
 TODAY = datetime.date.today()
 ROOT = pathlib.Path(__file__).parent
+import hashlib
+CSS_VERSION = hashlib.md5((ROOT / "assets" / "style.css").read_bytes()).hexdigest()[:8]
 
 # ---------------------------------------------------------------------------
 # One place for every outbound link. Replace a URL with your affiliate link
@@ -90,7 +92,7 @@ def page(title, description, path, body, schema=None):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{FAVICON}">
 {FONTS}
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v={CSS_VERSION}">
 {ld}
 </head>
 <body>
