@@ -29,7 +29,7 @@ LINKS = {
     "Pictory":     {"url": "https://pictory.ai",      "aff": False},
     "Runway":      {"url": "https://runwayml.com",    "aff": False},
     "Otter.ai":    {"url": "https://otter.ai",        "aff": False},
-    "Fireflies.ai":{"url": "https://fireflies.ai",    "aff": False},
+    "Fireflies.ai":{"url": "https://fireflies.ai/?fpr=victor-4901be", "aff": True},
     "Fathom":      {"url": "https://fathom.video",    "aff": False},
     "tl;dv":       {"url": "https://tldv.io",         "aff": False},
     "Jasper":      {"url": "https://www.jasper.ai",   "aff": False},
