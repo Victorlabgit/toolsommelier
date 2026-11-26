@@ -56,16 +56,15 @@ ARTICLES = [
 {
 "slug": "best-ai-video-generators",
 "category": "Video",
-"title": "Best AI Video Generators: Synthesia, HeyGen, Pictory, Runway, Descript",
+"title": "Best AI Video Generators: Synthesia, HeyGen, Runway, Descript",
 "h1": "The best AI video generators, paired to the video you need",
-"description": "Synthesia, HeyGen, Pictory, Runway and Descript compared: the right AI video tool for avatar videos, translation, faceless content or creative clips.",
+"description": "Synthesia, HeyGen, Runway and Descript compared: the right AI video tool for avatar videos, translation, creative clips or editing your own footage.",
 "read": 8,
-"intro": """<p>"AI video" covers very different jobs. A training video with a talking presenter, a faceless YouTube Short made from a blog post, and a cinematic generated clip need completely different tools.</p>
+"intro": """<p>"AI video" covers very different jobs. A training video with a talking presenter, a social clip you filmed yourself, and a cinematic generated clip need completely different tools.</p>
 <p>Here's how the main options pair with each type of video.</p>""",
 "verdict": """<ul>
 <li><strong>Corporate training and presenter videos:</strong> Synthesia.</li>
 <li><strong>Personal avatars and video translation with lip-sync:</strong> HeyGen.</li>
-<li><strong>Turning articles and scripts into videos with stock footage:</strong> Pictory.</li>
 <li><strong>Creative, generated footage from text or images:</strong> Runway.</li>
 <li><strong>Editing videos you filmed yourself:</strong> Descript.</li>
 </ul>""",
@@ -80,11 +79,6 @@ ARTICLES = [
   "body": "HeyGen lets you create a digital twin of yourself and generate videos from text. Its video translation feature re-voices an existing video in another language with lip-sync, which is powerful for creators going international. It's more creator- and marketing-oriented than Synthesia.",
   "pros": ["Custom avatar of yourself", "Video translation with lip-sync", "Fast for social media formats"],
   "cons": ["Credit limits on lower plans", "Avatars still feel artificial in some long-form content"]},
- {"tool": "Pictory", "label": "Best for faceless content", "best_for": "Turning blog posts and scripts into videos", "free": "Free trial",
-  "note": "Practical and efficient, a reliable table wine.",
-  "body": "Pictory takes a script, a blog post or a long video and turns it into short videos with stock footage, captions and an AI voiceover. It's a favorite for faceless YouTube channels and for repurposing written content into social clips.",
-  "pros": ["Article-to-video in a few clicks", "Automatic captions", "Great for repurposing content"],
-  "cons": ["Stock footage can feel generic", "Less creative control than a real editor"]},
  {"tool": "Runway", "label": "Best for creative work", "best_for": "Generated footage, visual effects and experimental clips", "free": "Yes, limited credits",
   "note": "Bold and avant-garde, for adventurous palates.",
   "body": "Runway is a creative suite for generating video from text or images and for AI-powered editing effects. It's the choice of filmmakers, designers and artists rather than of teams making training content.",
@@ -98,12 +92,11 @@ ARTICLES = [
 ],
 "how_to_choose": """<ul>
 <li><strong>Do you want a person on screen without filming?</strong> Synthesia for business, HeyGen for personal branding.</li>
-<li><strong>Faceless channel or content repurposing?</strong> Pictory.</li>
 <li><strong>Creative or ad footage?</strong> Runway.</li>
 <li><strong>Already filming?</strong> Descript.</li>
 </ul>""",
 "faq": [
- ("What is the best AI video generator for beginners?", "Pictory and HeyGen are among the easiest to start with: paste a script, pick a template, and you get a video in minutes."),
+ ("What is the best AI video generator for beginners?", "HeyGen and Descript are among the easiest to start with: HeyGen turns a script into an avatar video in minutes, and Descript lets you edit your own footage as easily as a document."),
  ("Synthesia or HeyGen?", "Synthesia is stronger for companies producing training and internal videos at scale; HeyGen is stronger for creators, personal avatars and video translation. See our <a href=\"/synthesia-vs-heygen.html\">full comparison</a>."),
  ("Can AI video tools translate my videos?", "Yes. HeyGen offers video translation with lip-sync, and ElevenLabs offers audio dubbing that keeps the speaker's voice."),
 ],
