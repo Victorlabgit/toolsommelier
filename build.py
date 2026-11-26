@@ -211,7 +211,7 @@ ABOUT = """
 <h2>How we make money</h2>
 <p>Some links are affiliate links. If you subscribe through them, the vendor may pay us a commission. You pay the same price. Commissions never decide a ranking: a tool with no affiliate program can, and does, rank first. See our <a href="/disclosure.html">affiliate disclosure</a>.</p>
 <h2>Spotted an error?</h2>
-<p>Prices and features move fast. If something is out of date, tell us and we will fix it.</p>
+<p>Prices and features move fast. We review every guide regularly and fix anything that has changed.</p>
 """
 
 DISCLOSURE = """
@@ -229,13 +229,11 @@ PRIVACY = """
 <h2>Cookies</h2>
 <p>We do not set advertising or tracking cookies. When you click an outbound link to a software vendor, that vendor's own website may set cookies (including affiliate tracking cookies) under its own privacy policy.</p>
 <h2>Your rights</h2>
-<p>Under the GDPR you have the right to access, correct and delete personal data about you. Since we do not collect personal data ourselves, there is usually nothing to request; you can still contact us at the address in our <a href="/legal.html">legal notice</a>.</p>
+<p>Under the GDPR you have the right to access, correct and delete personal data about you. Since we do not collect personal data ourselves, there is usually nothing to request; see our <a href="/legal.html">legal notice</a> for publisher and hosting details.</p>
 """
 
 LEGAL = """
-<p><strong>Publisher:</strong> [YOUR FULL NAME], [YOUR POSTAL ADDRESS], France.<br>
-<strong>Contact:</strong> [YOUR CONTACT EMAIL]<br>
-<strong>Publication director:</strong> [YOUR FULL NAME]</p>
+<p><strong>Publisher:</strong> this website is published by a private individual (non-professional publisher) who, in accordance with Article 6-III-2 of the French law n°2004-575 of 21 June 2004 (LCEN), has chosen not to disclose their identity publicly. Their identification details have been provided to the hosting provider named below.</p>
 <p><strong>Hosting:</strong> GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States. <a href="https://github.com" rel="nofollow noopener" target="_blank">github.com</a></p>
 <p><strong>Domain registrar:</strong> IONOS SARL, France.</p>
 <p>All content on this website is provided for general information. Prices and features of third-party tools may change without notice; always check the vendor's official website before buying.</p>
