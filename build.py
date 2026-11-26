@@ -20,7 +20,7 @@ ROOT = pathlib.Path(__file__).parent
 # once you are approved, set "aff": True, then run build.py again.
 # ---------------------------------------------------------------------------
 LINKS = {
-    "ElevenLabs":  {"url": "https://elevenlabs.io",   "aff": False},
+    "ElevenLabs":  {"url": "https://try.elevenlabs.io/q2j4i44qw31b", "aff": True},
     "Murf AI":     {"url": "https://murf.ai",         "aff": False},
     "Descript":    {"url": "https://www.descript.com","aff": False},
     "Speechify":   {"url": "https://speechify.com",   "aff": False},
@@ -89,7 +89,7 @@ def page(title, description, path, body, schema=None):
     <div><a href="/about.html">How we pick</a><br><a href="/disclosure.html">Affiliate disclosure</a></div>
     <div><a href="/privacy.html">Privacy</a><br><a href="/legal.html">Legal notice</a></div>
   </div>
-  <p class="small">Some links on this site are affiliate links: if you buy through them we may earn a commission, at no extra cost to you. It never changes our rankings. Product names and logos belong to their respective owners. &copy; {TODAY.year} {NAME}.</p>
+  <p class="small">Some links on this site are affiliate links: if you buy through them we may earn a commission, at no extra cost to you. It never changes our rankings. Product names and logos belong to their respective owners; ElevenLabs is a trademark of Eleven Labs Inc. &copy; {TODAY.year} {NAME}.</p>
 </div></footer>
 </body>
 </html>
