@@ -211,5 +211,5 @@ article .newsletter p{font-size:16px;line-height:1.6}
 .newsletter.home{grid-template-columns:1.1fr 1fr;align-items:center;gap:40px;padding:44px 48px;margin:0}
 .newsletter.home h2{font-size:38px}
 @media(max-width:800px){.newsletter.home{grid-template-columns:1fr;padding:30px 26px}}
-.nl-form{min-height:60px}
+.nl-form{min-height:60px;background:var(--bone);border-radius:var(--r-sm);padding:18px 18px 10px}
 .subscribed-banner{background:var(--oxblood);color:var(--bone);padding:14px 0;font-size:15px;text-align:center}
