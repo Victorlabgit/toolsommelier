@@ -79,7 +79,9 @@ def link(name, text=None, cls=None):
     data = LINKS[name]
     rel = "sponsored nofollow noopener" if data["aff"] else "nofollow noopener"
     c = f' class="{cls}"' if cls else ""
-    return f'<a href="{data["url"]}" target="_blank" rel="{rel}"{c}>{html.escape(text or name)}</a>'
+    ev = "affiliate-click" if data["aff"] else "outbound-click"
+    track = f' data-umami-event="{ev}" data-umami-event-tool="{html.escape(name)}"'
+    return f'<a href="{data["url"]}" target="_blank" rel="{rel}"{c}{track}>{html.escape(text or name)}</a>'
 
 
 def page(title, description, path, body, schema=None):
@@ -104,6 +106,7 @@ def page(title, description, path, body, schema=None):
 <link rel="icon" href="{FAVICON}">
 {FONTS}
 <link rel="stylesheet" href="/assets/style.css?v={CSS_VERSION}">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="ad65cc86-b768-4880-a7d9-c9a12f0486d1"></script>
 {ld}
 </head>
 <body>
@@ -414,6 +417,8 @@ PRIVACY = """
 <p>The site is hosted by GitHub Pages (GitHub, Inc.). Like any web host, GitHub may log technical data such as your IP address for security purposes. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="nofollow noopener" target="_blank">GitHub's privacy statement</a>.</p>
 <h2>Newsletter</h2>
 <p>If you subscribe to The Weekly Pairing, your email address is collected and stored by our newsletter provider, beehiiv (Beehiiv Inc., United States), which sends the emails on our behalf. We use it only to send you the newsletter. The legal basis is your consent (GDPR art. 6(1)(a)): you confirm your subscription by clicking a link in a confirmation email (double opt-in), and you can unsubscribe at any time with the link at the bottom of every email, after which your address is no longer used for sending. beehiiv may record whether emails are opened and links clicked, to help us understand what readers find useful. See <a href="https://www.beehiiv.com/privacy" rel="nofollow noopener" target="_blank">beehiiv's privacy policy</a>. The signup form on our pages is loaded from beehiiv's servers.</p>
+<h2>Audience measurement</h2>
+<p>We count visits and clicks on outbound links with Umami Cloud (Umami Software, data hosted in the EU), a privacy-friendly analytics service that uses no cookies, does not track you across websites and does not collect personal data such as your IP address in a way that identifies you. We use these aggregated statistics only to understand which pages and recommendations are useful. See <a href="https://umami.is/privacy" rel="nofollow noopener" target="_blank">Umami's privacy policy</a>.</p>
 <h2>Fonts</h2>
 <p>Our typefaces are served by Bunny Fonts (BunnyWay d.o.o., EU), a privacy-focused font service that does not use cookies or track visitors.</p>
 <h2>Cookies</h2>
