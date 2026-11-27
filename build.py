@@ -99,7 +99,7 @@ LINKS = {
     "Runway":      {"url": "https://runwayml.com",    "aff": False},
     "Otter.ai":    {"url": "https://otter.ai",        "aff": False},
     "Fireflies.ai":{"url": "https://fireflies.ai/?fpr=victor-4901be", "aff": True},
-    "Fathom":      {"url": "https://fathom.video",    "aff": False},
+    "Fathom":      {"url": "https://www.fathom.ai",   "aff": False},
     "tl;dv":       {"url": "https://tldv.cello.so/XeSTTwlN4cX", "aff": True},
     "Jasper":      {"url": "https://www.jasper.ai",   "aff": False},
     "Copy.ai":     {"url": "https://www.copy.ai",     "aff": False},

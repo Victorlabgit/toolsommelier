@@ -292,6 +292,58 @@ ARTICLES = [
 },
 # ---------------------------------------------------------------------------
 {
+"slug": "fireflies-vs-fathom",
+"category": "Head-to-head",
+"title": "Fireflies vs Fathom: Which AI Note Taker to Pick?",
+"h1": "Fireflies.ai vs Fathom: which AI note taker should you pick?",
+"description": "Fireflies.ai vs Fathom compared on free plans, languages, video, CRM sync and team features, so you can choose the right AI meeting note taker for your calls.",
+"read": 6,
+"intro": """<p>Fireflies.ai and Fathom are two of the AI note takers people compare most often. Both join your Zoom, Google Meet and Microsoft Teams calls, record them, and send you a summary when the meeting ends. Both have a free plan. So where is the real difference?</p>
+<p>Fathom is built around a generous free plan for individuals: per Fathom, recordings, transcription and storage are unlimited, with clean summaries and an option to record without a bot. Fireflies is built around breadth: 100+ transcription languages (per Fireflies), file uploads, a large integration library and analytics for sales and customer teams on its higher plans.</p>""",
+"verdict": """<p><strong>Choose Fireflies.ai</strong> if your meetings run in many languages, if you also want to transcribe uploaded audio or video files, or if your team needs notes pushed into lots of tools and conversation analytics across calls.</p>
+<p><strong>Choose Fathom</strong> if you mostly meet in English or another major European language and want the most generous free plan for yourself, with unlimited recordings and the option to record without a bot in the call.</p>""",
+"picks": [
+ {"tool": "Fireflies.ai", "label": "Pick for languages and integrations", "best_for": "Teams that meet in many languages and connect many tools", "free": "Yes, with limited storage",
+  "note": "A well-travelled blend that pairs with almost anything.",
+  "body": "Fireflies records and transcribes your calls and turns them into a searchable library with AI summaries and AskFred, its assistant for questions about past meetings. Its help center cites automatic detection of 100+ languages, a multi-language mode on the Business plan, and file uploads for existing audio and video. Paid plans add video capture and 100+ integrations; conversation intelligence and CRM autofill for HubSpot and Salesforce sit on the Business plan and above.",
+  "pros": ["100+ transcription languages, according to Fireflies", "Upload existing recordings, not just live calls", "Wide integration library and team analytics on higher plans"],
+  "cons": ["Free plan caps storage and AI credits", "Video recording and CRM autofill need a paid plan"]},
+ {"tool": "Fathom", "label": "Pick for a generous free plan", "best_for": "Individuals and small teams who want great notes for free", "free": "Yes, unlimited recordings (per Fathom)",
+  "note": "Clean and easy-drinking, generous with the pour.",
+  "body": "Fathom's help center says its free version includes unlimited storage and recordings, and its pricing page adds unlimited transcription, instant AI summaries, clips and search across calls. It captures full video, offers bot-free recording on Mac, and has an iOS app for in-person conversations. Per Fathom, it transcribes and summarizes natively in seven languages (English, Spanish, Dutch, French, Italian, German and Portuguese). Team plans add shared workspaces; the Business plan adds CRM field sync, deal view and coaching scorecards.",
+  "pros": ["Very generous free plan for individuals", "Bot-free recording option on Mac", "Video recording and clips included"],
+  "cons": ["Seven native transcription languages, far fewer than Fireflies", "CRM field sync reserved for the Business plan"]},
+],
+"extra": [
+ ("Side by side", """<div class="table-scroll"><table class="compare">
+<tr><th></th><th>Fireflies.ai</th><th>Fathom</th></tr>
+<tr><td>Zoom, Google Meet, Teams</td><td>Yes, plus Webex and others</td><td>Yes, plus Slack huddles</td></tr>
+<tr><td>Transcription languages</td><td>100+ (per Fireflies)</td><td>7 native languages (per Fathom)</td></tr>
+<tr><td>Free plan</td><td>Yes, storage and AI credits capped</td><td>Yes, unlimited recordings and transcription (per Fathom)</td></tr>
+<tr><td>Video recording</td><td>On paid plans</td><td>Yes, including the free plan</td></tr>
+<tr><td>Record without a bot</td><td>Chrome extension</td><td>Desktop app on Mac</td></tr>
+<tr><td>Upload existing audio or video files</td><td>Yes</td><td>Not offered</td></tr>
+<tr><td>CRM sync (HubSpot, Salesforce)</td><td>Business plan and above</td><td>Business plan and above</td></tr>
+</table></div>
+<p class="small-note">Sources: Fireflies' help center and pricing guides, Fathom's pricing page and help center. Plans change often: check them before you buy.</p>"""),
+ ("Which one for your job?", """<ul>
+<li><strong>Freelancer or consultant who wants free notes on every call:</strong> Fathom.</li>
+<li><strong>International team with calls in Hindi, Japanese or Arabic:</strong> Fireflies, because Fathom's native language list is short.</li>
+<li><strong>Podcasts, interviews or recordings you already have:</strong> Fireflies, which accepts file uploads.</li>
+<li><strong>Sales team that wants CRM updates and coaching:</strong> both put this on their Business plan, so trial both on real deals.</li>
+</ul>"""),
+],
+"how_to_choose": """<p>Start with two questions: <strong>which languages do you meet in, and how much do you want to pay?</strong> English or a major European language, and you want the most for free → Fathom. Many languages, uploaded files, or a team that lives in its integrations → Fireflies. Both have free plans, so record the same call with each, and always tell participants they are being recorded.</p>
+<p>Comparing more than two tools? Our <a href="/best-ai-meeting-note-takers.html">guide to the best AI meeting note takers</a> also covers Otter and tl;dv. Weighing Fireflies against another rival? Read <a href="/fireflies-vs-otter.html">Fireflies vs Otter</a>.</p>""",
+"faq": [
+ ("Is Fathom really free?", "Yes. Fathom's help center says its free version includes unlimited storage and recordings, and its pricing page lists unlimited transcription and AI summaries. Team features and CRM sync require a paid plan."),
+ ("Which supports more languages, Fireflies or Fathom?", "Fireflies, by a wide margin: it cites automatic detection of 100+ languages, while Fathom lists seven native transcription languages."),
+ ("Can Fathom or Fireflies record without a bot joining the call?", "Both offer an option. Fathom records without a bot through its Mac desktop app, and Fireflies through its Chrome extension."),
+ ("Do Fireflies and Fathom sync with HubSpot and Salesforce?", "Yes. Both reserve automatic CRM updates for HubSpot and Salesforce to their Business plans and above."),
+],
+},
+# ---------------------------------------------------------------------------
+{
 "slug": "best-ai-meeting-note-takers",
 "category": "Productivity",
 "title": "Best AI Meeting Note Takers: Otter vs Fireflies vs Fathom vs tl;dv",

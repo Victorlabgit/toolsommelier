@@ -34,6 +34,11 @@
   "modified": "2026-11-27",
   "published": "2026-11-27"
  },
+ "fireflies-vs-fathom": {
+  "hash": "ad84b79c3cb8",
+  "modified": "2026-11-27",
+  "published": "2026-11-27"
+ },
  "fireflies-vs-otter": {
   "hash": "4a7e2584f6f9",
   "modified": "2026-11-27",
@@ -62,6 +67,9 @@
  },
  "og:elevenlabs-vs-murf": {
   "sig": "d60ab2f109"
+ },
+ "og:fireflies-vs-fathom": {
+  "sig": "c2947c0360"
  },
  "og:fireflies-vs-otter": {
   "sig": "3a8f59725d"
