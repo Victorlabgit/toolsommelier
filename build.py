@@ -105,6 +105,10 @@ LINKS = {
     "Copy.ai":     {"url": "https://www.copy.ai",     "aff": False},
     "Writesonic":  {"url": "https://writesonic.com",  "aff": False},
     "Grammarly":   {"url": "https://www.grammarly.com","aff": False},
+    "Surfer":      {"url": "https://surfer.ai",       "aff": False},
+    "Frase":       {"url": "https://www.frase.io",    "aff": False},
+    "NeuronWriter":{"url": "https://neuronwriter.com","aff": False},
+    "Semrush":     {"url": "https://www.semrush.com", "aff": False},
 }
 
 LOGO_MARK = '<g stroke="#d8bf8a" stroke-width="10"><line x1="170" y1="170" x2="256" y2="140"/><line x1="256" y1="140" x2="342" y2="170"/><line x1="170" y1="170" x2="256" y2="256"/><line x1="342" y1="170" x2="256" y2="256"/><line x1="256" y1="256" x2="170" y2="342"/><line x1="256" y1="256" x2="342" y2="342"/><line x1="170" y1="342" x2="256" y2="372"/><line x1="342" y1="342" x2="256" y2="372"/></g><g fill="#150c0f" stroke="#d8bf8a" stroke-width="10"><circle cx="170" cy="170" r="24"/><circle cx="342" cy="170" r="24"/><circle cx="170" cy="342" r="24"/><circle cx="342" cy="342" r="24"/><circle cx="256" cy="140" r="18"/><circle cx="256" cy="372" r="18"/></g><circle cx="256" cy="256" r="38" fill="#9a2a3b" stroke="#d8bf8a" stroke-width="10"/>'

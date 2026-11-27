@@ -12,6 +12,7 @@
 - [Fireflies.ai vs Fathom: which AI note taker should you pick?](https://toolsommelier.com/fireflies-vs-fathom.html): Fireflies.ai vs Fathom compared on free plans, languages, video, CRM sync and team features, so you can choose the right AI meeting note taker for your calls.
 - [The best AI meeting note takers, paired to how you meet](https://toolsommelier.com/best-ai-meeting-note-takers.html): Otter.ai, Fireflies.ai, Fathom and tl;dv compared: the best AI note taker for Zoom, Google Meet and Teams, from free plans to sales teams.
 - [The best AI writing tools for marketing, paired to your team](https://toolsommelier.com/best-ai-writing-tools.html): Jasper, Copy.ai, Writesonic and Grammarly compared: which AI writing tool fits marketing teams, SEO content, sales workflows or everyday writing.
+- [The best AI SEO tools for content writers, paired to how you work](https://toolsommelier.com/best-ai-seo-content-tools.html): The best AI SEO tools for content writers compared: Surfer, Frase, NeuronWriter and Semrush Content Toolkit for briefs, optimization and AI search visibility.
 
 ## Journal (quick answers)
 - [Can you use ElevenLabs commercially? What the free and paid plans allow](https://toolsommelier.com/blog/can-you-use-elevenlabs-commercially.html): Can you use ElevenLabs commercially? Only on a paid plan. Here is what the free plan allows, the attribution rule, and the catches to know before you publish.
