@@ -29,6 +29,16 @@
   "modified": "2026-11-26",
   "published": "2026-11-26"
  },
+ "elevenlabs-vs-murf": {
+  "hash": "198df475d853",
+  "modified": "2026-11-27",
+  "published": "2026-11-27"
+ },
+ "fireflies-vs-otter": {
+  "hash": "4a7e2584f6f9",
+  "modified": "2026-11-27",
+  "published": "2026-11-27"
+ },
  "og:best-ai-meeting-note-takers": {
   "sig": "6a960f7939"
  },
@@ -50,15 +60,29 @@
  "og:blog-is-fireflies-ai-free": {
   "sig": "cf9bb8c2ee"
  },
+ "og:elevenlabs-vs-murf": {
+  "sig": "d60ab2f109"
+ },
+ "og:fireflies-vs-otter": {
+  "sig": "3a8f59725d"
+ },
  "og:home": {
   "sig": "a1ab562594"
  },
  "og:synthesia-vs-heygen": {
   "sig": "409160a2b1"
  },
+ "og:tldv-vs-fireflies": {
+  "sig": "88187f50c4"
+ },
  "synthesia-vs-heygen": {
   "hash": "fd85f7a6c301",
   "modified": "2026-11-26",
   "published": "2026-11-26"
+ },
+ "tldv-vs-fireflies": {
+  "hash": "36052b48dfd0",
+  "modified": "2026-11-27",
+  "published": "2026-11-27"
  }
 }

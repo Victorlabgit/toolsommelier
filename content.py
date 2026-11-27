@@ -142,6 +142,156 @@ ARTICLES = [
 },
 # ---------------------------------------------------------------------------
 {
+"slug": "fireflies-vs-otter",
+"category": "Head-to-head",
+"title": "Fireflies vs Otter: Which AI Note Taker Should You Pick?",
+"h1": "Fireflies.ai vs Otter.ai: which AI note taker fits how you meet?",
+"description": "Fireflies.ai vs Otter.ai compared on languages, live transcription, CRM integrations, free plans and who each one suits, so you pick the right note taker.",
+"read": 7,
+"intro": """<p>Fireflies.ai and Otter.ai are two of the most searched AI meeting assistants. Both join your Zoom, Google Meet and Microsoft Teams calls, transcribe them and send you a summary. On paper they look alike. In practice, they are built around different habits.</p>
+<p>Otter grew up as a live transcription app: you watch the transcript appear as people talk, on your laptop or your phone. Fireflies grew up as a meeting memory for teams: every call becomes searchable, and the notes flow into the tools your team already uses. That difference should drive your choice more than any feature list.</p>""",
+"verdict": """<p><strong>Choose Fireflies.ai</strong> if your meetings happen in several languages, or if notes need to land in a CRM, Slack or a project tool, with a searchable library of every call.</p>
+<p><strong>Choose Otter.ai</strong> if you want to follow a transcript live, record in-person conversations from your phone, and you mostly meet in English or one of the few languages Otter supports.</p>""",
+"picks": [
+ {"tool": "Fireflies.ai", "label": "Pick for teams and languages", "best_for": "Teams that meet in several languages and live in their CRM", "free": "Yes, with limited storage",
+  "note": "A well-connected blend that keeps every conversation in the cellar.",
+  "body": "Fireflies records and transcribes your calls, then turns them into a searchable archive with AI summaries. Its official pricing page cites transcription in 100+ languages, and higher plans add a multi-language mode and conversation intelligence for sales and customer teams. Integrations are the other strength: notes can be pushed to CRMs, Slack and project tools automatically.",
+  "pros": ["Transcription in 100+ languages, according to Fireflies", "Searchable library of all your calls", "Integrations with CRMs and team tools"],
+  "cons": ["Free plan storage is capped, so older calls pile up fast", "Conversation intelligence is reserved for higher plans"]},
+ {"tool": "Otter.ai", "label": "Pick for live transcription", "best_for": "Live transcripts, interviews, classes and in-person meetings", "free": "Yes, limited monthly minutes",
+  "note": "A dependable classic, best served in the moment.",
+  "body": "Otter's signature is the live transcript: you can read, highlight and comment while the conversation happens. Its mobile apps for iOS and Android make it easy to record a lecture or an in-person interview. Otter's pricing page lists a short set of transcription languages (English, Spanish, French, German, Japanese and Chinese) and CRM connections to Salesforce and HubSpot on paid plans.",
+  "pros": ["Real-time transcript you can follow and annotate", "Mobile apps for in-person recording", "Simple to set up for individuals"],
+  "cons": ["Free plan caps minutes per month and per conversation", "Far fewer languages than Fireflies"]},
+],
+"extra": [
+ ("Side by side", """<div class="table-scroll"><table class="compare">
+<tr><th></th><th>Fireflies.ai</th><th>Otter.ai</th></tr>
+<tr><td>Zoom, Google Meet, Teams</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Transcription languages</td><td>100+ (per Fireflies)</td><td>English, Spanish, French, German, Japanese, Chinese (per Otter)</td></tr>
+<tr><td>Live transcript during the call</td><td>Notes arrive after the call</td><td>Yes, a core feature</td></tr>
+<tr><td>Mobile recording in person</td><td>Available</td><td>Yes, iOS and Android apps</td></tr>
+<tr><td>CRM integrations</td><td>Yes, many integrations on paid plans</td><td>Salesforce and HubSpot on paid plans</td></tr>
+<tr><td>Free plan</td><td>Yes, storage capped</td><td>Yes, minutes capped</td></tr>
+</table></div>
+<p class="small-note">Sources: the official Fireflies.ai and Otter.ai pricing pages. Limits change often, so check them before you buy.</p>"""),
+ ("Which one for your job?", """<ul>
+<li><strong>Sales calls that must end up in HubSpot or Salesforce:</strong> both can do it on paid plans; Fireflies goes further with conversation analytics.</li>
+<li><strong>International team, calls in Portuguese, Italian or Hindi:</strong> Fireflies, because Otter's language list is short.</li>
+<li><strong>Students, journalists, researchers:</strong> Otter, for the live transcript and the phone app.</li>
+<li><strong>A solo user who just wants free notes:</strong> try both, and also look at Fathom in our <a href="/best-ai-meeting-note-takers.html">full note taker guide</a>.</li>
+</ul>"""),
+],
+"how_to_choose": """<p>Ask one question: <strong>do you need the transcript during the meeting, or a memory of all your meetings afterwards?</strong> During → Otter. Afterwards, across a team and several languages → Fireflies. Both have free plans, so record the same call with each before you commit, and always tell participants they are being recorded.</p>
+<p>Comparing more than two tools? Our <a href="/best-ai-meeting-note-takers.html">guide to the best AI meeting note takers</a> also covers Fathom and tl;dv.</p>""",
+"faq": [
+ ("Is Fireflies better than Otter?", "Neither is better overall. Fireflies suits teams that need many languages, integrations and a searchable call library; Otter suits people who want a live transcript and mobile recording."),
+ ("Does Otter support French or Spanish?", "Yes. Otter's pricing page lists English, Spanish, French, German, Japanese and Chinese for AI transcription. Fireflies covers many more languages."),
+ ("Are Fireflies and Otter free?", "Both have free plans with limits: Fireflies caps storage, Otter caps monthly minutes and the length of each conversation."),
+ ("Can both join Zoom, Google Meet and Teams?", "Yes. Both can join meetings on the three main platforms automatically and send notes afterwards."),
+],
+},
+# ---------------------------------------------------------------------------
+{
+"slug": "tldv-vs-fireflies",
+"category": "Head-to-head",
+"title": "tl;dv vs Fireflies: Best AI Meeting Recorder?",
+"h1": "tl;dv vs Fireflies.ai: which AI meeting recorder should you pick?",
+"description": "tl;dv vs Fireflies.ai compared on free plans, video recording, languages, CRM sync and clips, to help you choose the right AI meeting recorder for your team.",
+"read": 6,
+"intro": """<p>tl;dv and Fireflies.ai both record your Zoom, Google Meet and Microsoft Teams calls, transcribe them and write AI notes. Both have a free plan, both sync to CRMs. So which one should you install?</p>
+<p>The short version: tl;dv is built around <em>video</em> and sharing key moments, with a free plan that its makers describe as unlimited for recordings. Fireflies is built around <em>searchable transcripts</em> and integrations, with the widest language coverage of the two.</p>""",
+"verdict": """<p><strong>Choose tl;dv</strong> if you want video recordings of your calls, clips of key moments to share with your team, and a generous free plan to start.</p>
+<p><strong>Choose Fireflies.ai</strong> if transcripts matter more than video, you meet in many languages, and you want notes pushed into lots of tools automatically.</p>""",
+"picks": [
+ {"tool": "tl;dv", "label": "Pick for video and clips", "best_for": "Teams who share recordings and key moments", "free": "Yes, generous",
+  "note": "Lively and sociable, made to be passed around the table.",
+  "body": "tl;dv joins your calls, records video and transcript, and lets you clip and share the moments that matter, such as a customer quote or a decision. Its site describes free unlimited recordings and transcriptions in 30+ languages, with paid plans adding deeper AI reports and CRM autofill for HubSpot, Salesforce and Pipedrive. It also offers a desktop app that records without a bot in the call.",
+  "pros": ["Video recording and easy clips", "Free plan built for real use, not just a trial", "CRM autofill on paid plans"],
+  "cons": ["Fewer languages than Fireflies", "Advanced AI reports require a paid plan"]},
+ {"tool": "Fireflies.ai", "label": "Pick for transcripts and integrations", "best_for": "Teams that search past calls and connect many tools", "free": "Yes, with limited storage",
+  "note": "Rich and well-connected, with a long memory.",
+  "body": "Fireflies makes every meeting searchable and sends notes to CRMs, Slack and project tools. Its pricing page cites transcription in 100+ languages, with a multi-language mode and conversation intelligence on higher plans. It is the stronger pick when your meetings span many languages or when a sales team wants analytics across calls.",
+  "pros": ["100+ transcription languages, according to Fireflies", "Many integrations", "Conversation intelligence on higher plans"],
+  "cons": ["Free plan storage is capped", "Video is less central than on tl;dv"]},
+],
+"extra": [
+ ("Side by side", """<div class="table-scroll"><table class="compare">
+<tr><th></th><th>tl;dv</th><th>Fireflies.ai</th></tr>
+<tr><td>Zoom, Google Meet, Teams</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>Transcription languages</td><td>30+ (per tl;dv)</td><td>100+ (per Fireflies)</td></tr>
+<tr><td>Video recording and clips</td><td>Yes, a core feature</td><td>Video recording on plans that include it</td></tr>
+<tr><td>CRM sync</td><td>HubSpot, Salesforce, Pipedrive on paid plans</td><td>Yes, on paid plans</td></tr>
+<tr><td>Free plan</td><td>Yes, described as unlimited recordings</td><td>Yes, storage capped</td></tr>
+</table></div>
+<p class="small-note">Sources: tl;dv's and Fireflies' official websites. Plans change often: check them before you buy.</p>"""),
+],
+"how_to_choose": """<ul>
+<li><strong>You share call snippets with product, marketing or leadership?</strong> tl;dv.</li>
+<li><strong>Your meetings run in many languages?</strong> Fireflies.</li>
+<li><strong>You want the most you can get for free?</strong> Start with tl;dv, then compare with Fathom in our <a href="/best-ai-meeting-note-takers.html">note taker guide</a>.</li>
+<li><strong>Sales team that wants analytics?</strong> Fireflies' higher plans, or tl;dv's sales plan: test both on real calls.</li>
+</ul>
+<p>Also deciding between Fireflies and Otter? Read <a href="/fireflies-vs-otter.html">Fireflies vs Otter</a>.</p>""",
+"faq": [
+ ("Is tl;dv really free?", "Yes. tl;dv has a free plan that it describes as including unlimited recordings and transcriptions; paid plans add advanced AI reports and integrations."),
+ ("Which supports more languages, tl;dv or Fireflies?", "Fireflies cites 100+ transcription languages, while tl;dv cites 30+."),
+ ("Can tl;dv record without a bot joining the call?", "Yes. tl;dv offers a desktop app that records meetings without a bot appearing as a participant."),
+],
+},
+# ---------------------------------------------------------------------------
+{
+"slug": "elevenlabs-vs-murf",
+"category": "Head-to-head",
+"title": "ElevenLabs vs Murf AI: Which AI Voice Generator Wins?",
+"h1": "ElevenLabs vs Murf AI: which AI voice generator should you pick?",
+"description": "ElevenLabs vs Murf AI compared on voice realism, languages, voice cloning, commercial rights and workflow, so you pick the right AI voice generator.",
+"read": 7,
+"intro": """<p>ElevenLabs and Murf AI are both serious AI voice generators, used for YouTube voiceovers, explainer videos, courses and ads. But they approach the job from opposite ends.</p>
+<p>ElevenLabs is a voice lab: it focuses on the most natural, expressive speech possible, plus voice cloning and dubbing. Murf is a voiceover studio: it focuses on the workflow of producing a narration, syncing it to slides or video, and working on it as a team.</p>""",
+"verdict": """<p><strong>Choose ElevenLabs</strong> if realism and emotion come first, if you want to clone your own voice, or if you publish in many languages and want dubbing.</p>
+<p><strong>Choose Murf AI</strong> if you produce training, e-learning or explainer narrations as a team and want a timeline to sync voice with slides and video.</p>""",
+"picks": [
+ {"tool": "ElevenLabs", "label": "Pick for realism", "best_for": "Creators who want the most natural voices, cloning and dubbing", "free": "Yes, monthly credits, no commercial licence",
+  "note": "Full-bodied and expressive, with a long natural finish.",
+  "body": "ElevenLabs is widely seen as the benchmark for natural AI speech. Its pricing page lists a commercial licence, instant voice cloning and the Dubbing Studio from the first paid plan, with professional voice cloning on the plans above. Its comparison table shows more than 70 languages. The free plan is fine for testing but does not include a commercial licence.",
+  "pros": ["Very natural, emotional delivery", "Instant voice cloning from the first paid plan", "Dubbing into other languages"],
+  "cons": ["Credits can run out fast on long projects", "No commercial licence on the free plan"]},
+ {"tool": "Murf AI", "label": "Pick for teams and e-learning", "best_for": "Teams producing training, presentations and explainer voiceovers", "free": "Yes, limited",
+  "note": "Clean and precise, made for the conference room.",
+  "body": "Murf is built as a voiceover studio: paste a script, pick one of its 200+ voices in 35+ languages (according to Murf), then adjust pitch, speed, pauses and pronunciation, and sync it with visuals. Murf's terms allow commercial use of the voices, and its paid plans include commercial rights. Voice cloning exists but sits on higher-tier plans.",
+  "pros": ["Studio timeline to sync voice with slides and video", "Fine control over pronunciation and pauses", "Collaboration for teams"],
+  "cons": ["Less expressive than ElevenLabs on emotional reads", "Voice cloning reserved for higher plans"]},
+],
+"extra": [
+ ("Side by side", """<div class="table-scroll"><table class="compare">
+<tr><th></th><th>ElevenLabs</th><th>Murf AI</th></tr>
+<tr><td>Main strength</td><td>Voice realism, cloning, dubbing</td><td>Voiceover workflow for teams</td></tr>
+<tr><td>Languages</td><td>70+ (per ElevenLabs' pricing page)</td><td>35+ (per Murf)</td></tr>
+<tr><td>Voice cloning</td><td>Instant cloning from the first paid plan; professional cloning higher up</td><td>On higher-tier plans</td></tr>
+<tr><td>Commercial use</td><td>Paid plans only</td><td>Paid plans</td></tr>
+<tr><td>Sync with slides or video</td><td>Basic</td><td>Yes, a core feature</td></tr>
+<tr><td>Free plan</td><td>Yes, monthly credits</td><td>Yes, limited</td></tr>
+</table></div>
+<p class="small-note">Sources: ElevenLabs' pricing page, Murf's website and terms of service. Plans change often: check them before you buy.</p>"""),
+ ("Which one for your project?", """<ul>
+<li><strong>YouTube narration, audiobooks, character voices:</strong> ElevenLabs. See also <a href="/blog/can-you-use-elevenlabs-commercially.html">whether you can use ElevenLabs commercially</a>.</li>
+<li><strong>Corporate training and onboarding modules:</strong> Murf, for its studio and team features.</li>
+<li><strong>Translating your videos into other languages with your own voice:</strong> ElevenLabs dubbing.</li>
+<li><strong>Slide decks with a voiceover:</strong> Murf.</li>
+</ul>"""),
+],
+"how_to_choose": """<p>Paste the same 60-second script into both free plans and listen. If the difference in realism matters for your audience, pick ElevenLabs. If you care more about producing narrations quickly and editing them with colleagues, pick Murf.</p>
+<p>Comparing more voice tools? Our <a href="/best-ai-voice-generators.html">guide to the best AI voice generators</a> also covers Descript and Speechify.</p>""",
+"faq": [
+ ("Is ElevenLabs better than Murf?", "For pure voice realism and cloning, ElevenLabs is usually ahead. For producing synced voiceovers as a team, Murf's studio is more convenient."),
+ ("Can I use ElevenLabs or Murf voices commercially?", "Yes, on paid plans. ElevenLabs' free plan does not include a commercial licence, and Murf includes commercial rights on its paid plans."),
+ ("Which has more languages?", "ElevenLabs lists more than 70 languages on its pricing page; Murf lists 35+ on its website."),
+ ("Can I clone my voice on Murf?", "Yes, but Murf's voice cloning is reserved for higher-tier plans. ElevenLabs offers instant voice cloning from its first paid plan."),
+],
+},
+# ---------------------------------------------------------------------------
+{
 "slug": "best-ai-meeting-note-takers",
 "category": "Productivity",
 "title": "Best AI Meeting Note Takers: Otter vs Fireflies vs Fathom vs tl;dv",
