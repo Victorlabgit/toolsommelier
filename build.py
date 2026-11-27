@@ -17,6 +17,73 @@ TODAY = datetime.date.today()
 ROOT = pathlib.Path(__file__).parent
 import hashlib
 CSS_VERSION = hashlib.md5((ROOT / "assets" / "style.css").read_bytes()).hexdigest()[:8]
+INDEXNOW_KEY = "6569fc83f4f3f0dc3af02b621d2590d1"  # key file /<key>.txt is written by main(); ping https://api.indexnow.org/indexnow?url=<url>&key=<key>
+
+# Real publication / modification dates, tracked by content hash (dates.json, commit it).
+DATES_FILE = ROOT / "dates.json"
+DATES = json.loads(DATES_FILE.read_text()) if DATES_FILE.exists() else {}
+
+
+def stamp(key, obj):
+    h = hashlib.md5(json.dumps(obj, sort_keys=True, default=str).encode()).hexdigest()[:12]
+    t = TODAY.isoformat()
+    e = DATES.get(key)
+    if not e:
+        e = DATES[key] = {"hash": h, "published": t, "modified": t}
+    elif not e.get("hash"):
+        e["hash"] = h
+    elif e["hash"] != h:
+        e.update(hash=h, modified=t)
+    return e
+
+
+def og_image(key, kicker, title):
+    """Per-page 1200x630 social card in the cellar style. Returns its absolute URL."""
+    from PIL import Image, ImageDraw, ImageFont, ImageFilter
+    name = re.sub(r"[^a-z0-9-]+", "-", key.lower()).strip("-") or "home"
+    path = ROOT / "assets" / "og" / f"{name}.png"
+    sig = hashlib.md5((kicker + title).encode()).hexdigest()[:10]
+    e = DATES.setdefault("og:" + key, {})
+    if path.exists() and e.get("sig") == sig:
+        return f"{SITE}/assets/og/{name}.png"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    W, H = 1200, 630
+    img = Image.new("RGB", (W, H), "#150c0f")
+    glow = Image.new("RGB", (W, H), "#150c0f")
+    ImageDraw.Draw(glow).ellipse((W - 520, -320, W + 260, 380), fill="#5e1622")
+    img = Image.blend(img, glow.filter(ImageFilter.GaussianBlur(140)), 0.9)
+    d = ImageDraw.Draw(img)
+    d.rectangle((28, 28, W - 29, H - 29), outline="#d8bf8a", width=2)
+    fdir = "/usr/share/fonts/truetype/liberation/"
+    f_k = ImageFont.truetype(fdir + "LiberationSerif-Italic.ttf", 34)
+    f_s = ImageFont.truetype(fdir + "LiberationSans-Regular.ttf", 26)
+    d.text((84, 84), kicker, font=f_k, fill="#d8bf8a")
+    size = 68
+    while True:
+        f_t = ImageFont.truetype(fdir + "LiberationSerif-Bold.ttf", size)
+        words, lines, cur = title.split(), [], ""
+        for w in words:
+            test = (cur + " " + w).strip()
+            if d.textlength(test, font=f_t) > W - 200 and cur:
+                lines.append(cur); cur = w
+            else:
+                cur = test
+        lines.append(cur)
+        if len(lines) <= 4 or size <= 44:
+            break
+        size -= 6
+    y = 150 + (4 - len(lines)) * size * 0.35
+    for ln in lines:
+        d.text((84, y), ln, font=f_t, fill="#f1e9dd"); y += size * 1.15
+    d.text((84, H - 96), "toolsommelier.com", font=f_s, fill="#d8bf8a")
+    try:
+        logo = Image.open(ROOT / "assets" / "logo.png").convert("RGBA"); logo.thumbnail((92, 92))
+        img.paste(logo, (W - 84 - logo.width, H - 76 - logo.height), logo)
+    except Exception:
+        pass
+    img.save(path, optimize=True)
+    e["sig"] = sig
+    return f"{SITE}/assets/og/{name}.png"
 
 # ---------------------------------------------------------------------------
 # One place for every outbound link. Replace a URL with your affiliate link
@@ -84,8 +151,10 @@ def link(name, text=None, cls=None):
     return f'<a href="{data["url"]}" target="_blank" rel="{rel}"{c}{track}>{html.escape(text or name)}</a>'
 
 
-def page(title, description, path, body, schema=None):
+def page(title, description, path, body, schema=None, og=None, ptype="website", dates=None):
     canonical = f"{SITE}/{path}"
+    og = og or f"{SITE}/assets/linkedin-banner.png"
+    art = (f'<meta property="article:published_time" content="{dates["published"]}">\n<meta property="article:modified_time" content="{dates["modified"]}">\n') if dates else ""
     ld = f'<script type="application/ld+json">{json.dumps(schema)}</script>' if schema else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -96,13 +165,17 @@ def page(title, description, path, body, schema=None):
 <meta name="description" content="{html.escape(description)}">
 <meta name="theme-color" content="#150c0f">
 <link rel="canonical" href="{canonical}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{ptype}">
 <meta property="og:site_name" content="{NAME}">
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(description)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{SITE}/assets/linkedin-banner.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="{og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{art}<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{og}">
+<link rel="alternate" type="application/rss+xml" title="{NAME} Journal" href="{SITE}/blog/feed.xml">
 <link rel="icon" href="{FAVICON}">
 {FONTS}
 <link rel="stylesheet" href="/assets/style.css?v={CSS_VERSION}">
@@ -148,6 +221,8 @@ def newsletter_block(variant="dark"):
 
 
 def render_article(a):
+    dt = stamp(a["slug"], a)
+    og = og_image(a["slug"], a["category"], a["h1"])
     picks_html = ""
     toc = ['<a href="#at-a-glance">At a glance</a>']
     for p in a["picks"]:
@@ -191,7 +266,7 @@ def render_article(a):
   <h1>{a['h1']}</h1>
   <p class="standfirst">{a['description']}</p>
   <div class="seals">{seals}</div>
-  <div class="meta">Updated {TODAY.strftime('%B %Y')}, {a['read']} min read</div>
+  <div class="meta">Updated {fmt_date(dt['modified'])}, {a['read']} min read</div>
 </div>
 </div>
 <div class="paper"><div class="wrap"><div class="paper-grid">
@@ -208,6 +283,7 @@ def render_article(a):
 {a['how_to_choose']}
 <div class="faq"><h2 id="faq">FAQ</h2>{faq_html}</div>
 <p class="small-note">Our rankings are based on each tool's official documentation, published plans and independent user reviews. <a href="/about.html">How we pick</a>.</p>
+{related_reading(a)}
 {newsletter_block()}
 </article>
 </div></div></div>"""
@@ -216,14 +292,39 @@ def render_article(a):
         "@context": "https://schema.org",
         "@graph": [
             {"@type": "Article", "headline": a["h1"], "description": a["description"],
-             "dateModified": TODAY.isoformat(), "author": {"@type": "Organization", "name": NAME},
-             "publisher": {"@type": "Organization", "name": NAME}, "mainEntityOfPage": f"{SITE}/{a['slug']}.html"},
+             "datePublished": dt["published"], "dateModified": dt["modified"], "image": og,
+             "author": {"@type": "Organization", "name": NAME, "url": SITE + "/about.html"},
+             "publisher": {"@type": "Organization", "name": NAME, "logo": {"@type": "ImageObject", "url": f"{SITE}/assets/logo.png"}},
+             "mainEntityOfPage": f"{SITE}/{a['slug']}.html"},
+            {"@type": "ItemList", "name": a["h1"], "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "name": p["tool"], "url": f"{SITE}/{a['slug']}.html#{slug(p['tool'])}"}
+                for i, p in enumerate(a["picks"])]},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Guides", "item": SITE + "/#guides"},
+                {"@type": "ListItem", "position": 3, "name": a["h1"], "item": f"{SITE}/{a['slug']}.html"}]},
             {"@type": "FAQPage", "mainEntity": [
                 {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": html.unescape(ans)}}
                 for q, ans in a["faq"]]},
         ],
     }
-    return page(a["title"], a["description"], f"{a['slug']}.html", body, schema)
+    return page(a["title"], a["description"], f"{a['slug']}.html", body, schema, og=og, ptype="article", dates=dt)
+
+
+def related_reading(a):
+    """Internal links from a guide: Journal notes on the same guide, then sibling guides sharing a tool."""
+    from blog import POSTS as _P
+    notes = sorted([q for q in _P if q["guide"] == a["slug"]], key=lambda q: q["date"], reverse=True)[:5]
+    tools = {p["tool"] for p in a["picks"]}
+    sibs = [g for g in ARTICLES if g["slug"] != a["slug"] and (tools & {p["tool"] for p in g["picks"]} or g["category"] == a["category"])]
+    sibs += [g for g in ARTICLES if g["slug"] != a["slug"] and g not in sibs]
+    out = ""
+    if notes:
+        out += '<h2 id="from-the-journal">Questions people ask</h2><ul class="related">' + "".join(
+            f'<li><a href="/blog/{q["slug"]}.html">{q["h1"]}</a></li>' for q in notes) + "</ul>"
+    out += '<div class="more-notes"><h2>More pairings</h2><ul>' + "".join(
+        f'<li><a href="/{g["slug"]}.html">{g["h1"]}</a></li>' for g in sibs[:4]) + "</ul></div>"
+    return out
 
 
 CARTE = [
@@ -284,7 +385,7 @@ def render_home():
          "sameAs": [u for _, u, _ in SOCIALS]}]}
     return page(f"{NAME}: AI tool comparisons, perfectly paired",
                 "Honest, side-by-side comparisons of AI tools for voice, video, meetings and writing. Find the right AI tool for your job.",
-                "", body, schema)
+                "", body, schema, og=og_image("home", "The Tool Sommelier", "Every job has its perfect AI pairing"))
 
 
 # ---------------------------------------------------------------------------
@@ -314,6 +415,11 @@ def post_card(p):
 
 def render_post(p):
     g = GUIDES[p["guide"]]
+    dt = stamp("blog/" + p["slug"], p)
+    dt["published"] = p["date"]
+    if dt["modified"] < p["date"]:
+        dt["modified"] = p["date"]
+    og = og_image("blog-" + p["slug"], "The Journal · " + p["category"], p["h1"])
     others = [q for q in POSTS if q["slug"] != p["slug"]]
     others.sort(key=lambda q: q["date"], reverse=True)
     related = sorted(others, key=lambda q: q["guide"] != p["guide"])[:3]
@@ -348,10 +454,10 @@ def render_post(p):
 </div></div></div>"""
     url = f"{SITE}/blog/{p['slug']}.html"
     graph = [{"@type": "BlogPosting", "headline": p["h1"], "description": p["description"],
-              "datePublished": p["date"], "dateModified": p.get("updated", p["date"]),
+              "datePublished": dt["published"], "dateModified": dt["modified"],
               "author": {"@type": "Organization", "name": NAME},
               "publisher": {"@type": "Organization", "name": NAME, "logo": {"@type": "ImageObject", "url": f"{SITE}/assets/logo.png"}},
-              "mainEntityOfPage": url, "image": f"{SITE}/assets/linkedin-banner.png"},
+              "mainEntityOfPage": url, "image": og},
              {"@type": "BreadcrumbList", "itemListElement": [
                  {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
                  {"@type": "ListItem", "position": 2, "name": "Journal", "item": SITE + "/blog/"},
@@ -361,7 +467,7 @@ def render_post(p):
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<[^>]+>", "", a)}}
             for q, a in p["faq"]]})
     return page(f"{p['title']} | {NAME}", p["description"], f"blog/{p['slug']}.html", body,
-                {"@context": "https://schema.org", "@graph": graph})
+                {"@context": "https://schema.org", "@graph": graph}, og=og, ptype="article", dates=dt)
 
 
 def render_blog_index():
@@ -379,13 +485,13 @@ def render_blog_index():
     schema = {"@context": "https://schema.org", "@type": "Blog", "name": f"{NAME} Journal", "url": f"{SITE}/blog/"}
     return page(f"The Journal: quick answers about AI tools | {NAME}",
                 "Short, honest answers to common questions about AI tools: free plans, pricing tiers, how-tos and comparisons for voice, video, meetings and writing.",
-                "blog/", body, schema)
+                "blog/", body, schema, og=og_image("blog", "The Journal", "Quick, honest answers about AI tools"))
 
 
 def simple(title, slug_, description, inner):
     body = (f'<div class="wrap"><div class="article-top"><h1>{title}</h1></div></div>'
             f'<div class="paper simple"><div class="wrap"><div class="paper-grid"><article>{inner}</article></div></div></div>')
-    return page(f"{title} | {NAME}", description, f"{slug_}.html", body)
+    return page(f"{title} | {NAME}", description, f"{slug_}.html", body, og=f"{SITE}/assets/og/home.png")
 
 
 ABOUT = """
@@ -454,11 +560,44 @@ def main():
     for name, content in pages.items():
         (out / name).write_text(content, encoding="utf-8")
 
-    urls = [""] + [f"{a['slug']}.html" for a in ARTICLES] + ["blog/"] + [f"blog/{p['slug']}.html" for p in POSTS] + ["about.html", "disclosure.html"]
+    def lm(u):
+        if u.startswith("blog/") and u.endswith(".html"):
+            return DATES["blog/" + u[5:-5]]["modified"]
+        if u.endswith(".html") and u[:-5] in DATES:
+            return DATES[u[:-5]]["modified"]
+        return None
+    content_urls = [f"{a['slug']}.html" for a in ARTICLES] + [f"blog/{p['slug']}.html" for p in POSTS]
+    latest = max(lm(u) for u in content_urls)
+    latest_post = max([lm(f"blog/{p['slug']}.html") for p in POSTS] or [latest])
+    urls = [("", latest)] + [(u, lm(u)) for u in content_urls[:len(ARTICLES)]] + [("blog/", latest_post)] + \
+           [(u, lm(u)) for u in content_urls[len(ARTICLES):]] + [("about.html", None), ("disclosure.html", None)]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    sitemap += [f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY.isoformat()}</lastmod></url>" for u in urls]
+    sitemap += [f"<url><loc>{SITE}/{u}</loc>" + (f"<lastmod>{d}</lastmod>" if d else "") + "</url>" for u, d in urls]
     sitemap.append("</urlset>")
     (out / "sitemap.xml").write_text("\n".join(sitemap), encoding="utf-8")
+
+    # RSS feed of the Journal (helps discovery by aggregators and AI crawlers)
+    def rfc(iso):
+        return datetime.datetime.combine(datetime.date.fromisoformat(iso), datetime.time(8)).strftime("%a, %d %b %Y %H:%M:%S +0000")
+    items = "".join(
+        f"<item><title>{html.escape(p['h1'])}</title><link>{SITE}/blog/{p['slug']}.html</link>"
+        f"<guid>{SITE}/blog/{p['slug']}.html</guid><pubDate>{rfc(p['date'])}</pubDate>"
+        f"<description>{html.escape(p['description'])}</description></item>"
+        for p in sorted(POSTS, key=lambda p: p["date"], reverse=True)[:30])
+    (out / "blog" / "feed.xml").write_text(
+        f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{NAME} Journal</title>'
+        f"<link>{SITE}/blog/</link><description>Quick, honest answers about AI tools.</description>"
+        f"<language>en</language>{items}</channel></rss>", encoding="utf-8")
+
+    # llms.txt: a plain map of the site for AI assistants and answer engines
+    llms = [f"# {NAME}", "", f"> {TAGLINE} Independent comparisons of AI software (voice, video, meetings, writing), organized by the job you need done.", "",
+            "## Guides"] + [f"- [{a['h1']}]({SITE}/{a['slug']}.html): {html.unescape(a['description'])}" for a in ARTICLES] + \
+           ["", "## Journal (quick answers)"] + [f"- [{p['h1']}]({SITE}/blog/{p['slug']}.html): {html.unescape(p['description'])}"
+                                                for p in sorted(POSTS, key=lambda p: p["date"], reverse=True)] + \
+           ["", "## About", f"- [How we pick]({SITE}/about.html): our method", f"- [Affiliate disclosure]({SITE}/disclosure.html)"]
+    (out / "llms.txt").write_text("\n".join(llms) + "\n", encoding="utf-8")
+    (out / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
+    DATES_FILE.write_text(json.dumps(DATES, indent=1, sort_keys=True), encoding="utf-8")
     (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     (out / "CNAME").write_text("toolsommelier.com\n", encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")

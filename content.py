@@ -6,7 +6,7 @@ ARTICLES = [
 {
 "slug": "best-ai-voice-generators",
 "category": "Voice & audio",
-"title": "Best AI Voice Generators: ElevenLabs vs Murf vs Descript vs Speechify",
+"title": "Best AI Voice Generators: ElevenLabs vs Murf vs Descript",
 "h1": "The best AI voice generators, paired to your project",
 "description": "ElevenLabs, Murf AI, Descript and Speechify compared: which AI voice generator fits voiceovers, podcasts, e-learning or listening to documents.",
 "read": 7,
@@ -195,7 +195,7 @@ ARTICLES = [
 {
 "slug": "best-ai-writing-tools",
 "category": "Writing",
-"title": "Best AI Writing Tools for Marketing: Jasper vs Copy.ai vs Writesonic vs Grammarly",
+"title": "Best AI Writing Tools for Marketing: Jasper, Copy.ai & More",
 "h1": "The best AI writing tools for marketing, paired to your team",
 "description": "Jasper, Copy.ai, Writesonic and Grammarly compared: which AI writing tool fits marketing teams, SEO content, sales workflows or everyday writing.",
 "read": 7,
