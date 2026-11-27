@@ -180,7 +180,9 @@ def page(title, description, path, body, schema=None, og=None, ptype="website", 
 {art}<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{og}">
 <link rel="alternate" type="application/rss+xml" title="{NAME} Journal" href="{SITE}/blog/feed.xml">
-<link rel="icon" href="{FAVICON}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {FONTS}
 <link rel="stylesheet" href="/assets/style.css?v={CSS_VERSION}">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="ad65cc86-b768-4880-a7d9-c9a12f0486d1"></script>
