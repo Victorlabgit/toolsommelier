@@ -21,6 +21,58 @@ Fields:
 
 POSTS = [
 {
+"slug": "is-synthesia-free",
+"title": "Is Synthesia Free? What the Free Plan Includes",
+"h1": "Is Synthesia free? What the free plan includes and where it stops",
+"description": "Is Synthesia free? Yes, there is a free plan with no credit card. Here is what it includes, the watermark and length limits, and when a paid plan is worth it.",
+"date": "2026-11-28",
+"category": "Video",
+"read": 5,
+"guide": "best-ai-video-generators",
+"tools": ["Synthesia", "HeyGen", "Descript"],
+"answer": "<p>Yes. Synthesia has a free plan (called Basic) that you can start without a credit card. It gives you a small monthly allowance of video creation, a handful of stock AI avatars and voices in 140+ languages, but videos carry a Synthesia watermark and downloading is listed as a paid feature, so it is best for testing rather than publishing.</p>",
+"body": """
+<p>Synthesia is one of the best-known AI avatar video platforms: you type a script, pick a presenter, and it produces a talking-head video without a camera or a studio. So is Synthesia free? It is, within clear limits. Here is what the free plan includes according to Synthesia's own pricing and product pages, what it leaves out, and how to tell whether you need to upgrade.</p>
+
+<h2>Yes, Synthesia has a free plan (and no card is needed)</h2>
+<p>Synthesia's entry tier is called Basic and is listed at no cost. Its product page says you can sign up with no credit card, so this is a genuine free plan rather than a trial that silently turns into a subscription. You get a monthly allowance of credits; at the time of writing, Synthesia says the free allowance covers 10 minutes of Studio video creation or dubbing a month. On the free plan, videos made with Syren (Synthesia's prompt-to-video assistant) are capped at three minutes.</p>
+<p>Allowances and plan names change from time to time, so treat these figures as a snapshot and confirm them on the official {{tool:Synthesia|Synthesia pricing page}} before you plan a project around them.</p>
+
+<h2>What the free plan includes</h2>
+<ul>
+<li><strong>Stock AI avatars.</strong> A small selection of ready-made presenters (Synthesia's comparison table lists 9 on Basic). Paid plans open up a much larger library.</li>
+<li><strong>Voices and languages.</strong> Voiceovers in 140+ languages, which is one of Synthesia's strongest points for training and internal communication.</li>
+<li><strong>Templates and libraries.</strong> Pre-built templates, plus Synthesia's interactive extras such as surveys (with a small response allowance) and roleplays.</li>
+<li><strong>Sharing by link.</strong> You can share your videos online with a share link.</li>
+<li><strong>One editor.</strong> The free plan is a single-seat workspace.</li>
+</ul>
+
+<h2>The limits that matter</h2>
+<p>The free plan is enough to learn the editor and see how the avatars look with your own script. It is not built for publishing, for three reasons:</p>
+<ul>
+<li><strong>Watermark.</strong> Synthesia states that videos on the Basic plan carry a Synthesia watermark. Removing the logo is listed as a paid-plan feature.</li>
+<li><strong>Downloads.</strong> On the pricing page, "Download your content" appears among the features the first paid tier adds, which means on the free plan you should expect to share by link rather than export an MP4 to upload elsewhere. If you need the file for YouTube, an LMS or a client, plan for a paid plan.</li>
+<li><strong>Volume and length.</strong> A few minutes of video a month and a three-minute cap on Syren videos rule out longer courses or regular content.</li>
+</ul>
+<p>There are also no personal avatars on the free tier: creating an avatar of yourself starts on paid plans. On commercial use, Synthesia's FAQ says you own the videos you create and can use them for commercial projects, but the watermark and the lack of downloads make the free plan impractical for client or marketing work anyway.</p>
+
+<h2>What paid plans add</h2>
+<p>Synthesia's paid tiers (Starter, Pro, Team and Enterprise at the time of writing) mainly add more credits, downloads, watermark-free videos, a larger avatar library and personal avatars. Higher tiers bring branded video pages, interactive videos, custom fonts, collaboration and, at the top, security features such as SSO. Prices, and the promotions Synthesia sometimes runs, change often, so compare current plans on the {{tool:Synthesia|official Synthesia website}} instead of relying on figures in older reviews.</p>
+<p>A practical approach: build and refine your first video on the free plan, then subscribe only once the script, avatar and layout are ready to produce in volume.</p>
+
+<h2>Who the free plan is (and isn't) for</h2>
+<p>The free plan suits anyone evaluating avatar video: an L&amp;D manager checking whether AI presenters would work for onboarding, a marketer testing a multilingual explainer, or a creator curious about the format. It is not for anyone who needs a clean, downloadable file this week.</p>
+<p>If you are weighing alternatives, {{tool:HeyGen}} is Synthesia's closest rival and is often preferred for marketing and social video; we compare them in detail in <a href="/synthesia-vs-heygen.html">Synthesia vs HeyGen</a>. If your videos are mostly screen recordings or podcasts rather than avatars, {{tool:Descript}} may be a better fit. And if you plan to add a separate voiceover, our note on <a href="/blog/can-you-use-elevenlabs-commercially.html">using ElevenLabs commercially</a> covers the licensing side.</p>
+<p>For the wider picture, including when a text-to-video tool beats an avatar platform, see our <a href="/best-ai-video-generators.html">guide to the best AI video generators</a>. Start with the free plan, taste before you buy, and upgrade only when the free pour runs dry; the <a href="/best-ai-video-generators.html">AI video generator comparison</a> will help if Synthesia turns out not to be your vintage.</p>
+""",
+"faq": [
+("Is Synthesia free forever?", "Synthesia offers a free Basic plan with a monthly credit allowance rather than a time-limited trial, and you can sign up without a credit card. Check the official pricing page for the current allowance."),
+("Does Synthesia's free plan have a watermark?", "Yes. Synthesia states that videos made on the Basic plan carry a Synthesia watermark. Removing the logo requires a paid plan."),
+("Can I download videos on the Synthesia free plan?", "Synthesia's pricing page lists downloading your content as a feature of its paid plans, so on the free plan you should expect to share videos by link instead."),
+("Can I make an avatar of myself for free?", "No. Personal avatars are listed on Synthesia's paid plans; the free plan includes a small set of stock avatars only."),
+],
+},
+{
 "slug": "can-you-use-elevenlabs-commercially",
 "title": "Can You Use ElevenLabs Commercially? Free vs Paid",
 "h1": "Can you use ElevenLabs commercially? What the free and paid plans allow",

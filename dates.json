@@ -34,6 +34,11 @@
   "modified": "2026-11-26",
   "published": "2026-11-26"
  },
+ "blog/is-synthesia-free": {
+  "hash": "0a0395f68f0e",
+  "modified": "2026-11-28",
+  "published": "2026-11-28"
+ },
  "elevenlabs-vs-murf": {
   "hash": "198df475d853",
   "modified": "2026-11-27",
@@ -72,6 +77,9 @@
  },
  "og:blog-is-fireflies-ai-free": {
   "sig": "cf9bb8c2ee"
+ },
+ "og:blog-is-synthesia-free": {
+  "sig": "8dadec16df"
  },
  "og:elevenlabs-vs-murf": {
   "sig": "d60ab2f109"
