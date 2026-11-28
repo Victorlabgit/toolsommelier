@@ -105,6 +105,7 @@ LINKS = {
     "Copy.ai":     {"url": "https://www.copy.ai",     "aff": False},
     "Writesonic":  {"url": "https://writesonic.com",  "aff": False},
     "Grammarly":   {"url": "https://www.grammarly.com","aff": False},
+    "Rytr":        {"url": "https://rytr.me?via=toolsommelier", "aff": True},
     "Surfer":      {"url": "https://surfer.ai",       "aff": False},
     "Frase":       {"url": "https://www.frase.io",    "aff": False},
     "NeuronWriter":{"url": "https://neuronwriter.com","aff": False},
@@ -168,6 +169,7 @@ def page(title, description, path, body, schema=None, og=None, ptype="website", 
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(description)}">
 <meta name="theme-color" content="#150c0f">
+<meta name="impact-site-verification" value="15b705f1-12ae-4c7a-92f8-b232e483e948">
 <link rel="canonical" href="{canonical}">
 <meta property="og:type" content="{ptype}">
 <meta property="og:site_name" content="{NAME}">

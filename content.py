@@ -407,6 +407,7 @@ ARTICLES = [
 <li><strong>Marketing teams that need a consistent brand voice:</strong> Jasper.</li>
 <li><strong>Sales and go-to-market workflows:</strong> Copy.ai.</li>
 <li><strong>SEO blog content:</strong> Writesonic.</li>
+<li><strong>Short texts on a small budget:</strong> Rytr.</li>
 <li><strong>Polishing everyday writing (emails, docs):</strong> Grammarly.</li>
 </ul>""",
 "picks": [
@@ -425,6 +426,11 @@ ARTICLES = [
   "body": "Writesonic focuses on SEO content: researching topics, generating structured articles and optimizing them for search. It's a good fit for bloggers and content marketers whose main goal is organic traffic.",
   "pros": ["SEO-oriented article generation", "Research and optimization features", "Good for blogs and content sites"],
   "cons": ["AI drafts still need human fact-checking", "Feature set changes frequently: check current plans"]},
+ {"tool": "Rytr", "label": "Best on a small budget", "best_for": "Solo writers who want short-form drafts without a team plan", "free": "Yes, 10,000 characters a month (per Rytr)",
+  "note": "A light, easy-drinking house wine.",
+  "body": "Rytr is a simple AI writing assistant for short-form content: emails, social posts, product descriptions and other everyday texts. Per Rytr, the free plan includes 10,000 characters a month, 40+ writing use cases and 30+ languages, and its entry paid plan removes the character cap. It now also positions itself as a communication assistant for emails and outreach. It suits freelancers and small businesses more than marketing teams.",
+  "pros": ["Free plan that stays free", "Low-cost entry plan with unlimited characters (per Rytr)", "40+ use cases and 30+ languages"],
+  "cons": ["No team brand-voice features like Jasper's", "Best for short texts; long articles need more editing"]},
  {"tool": "Grammarly", "label": "Best for everyday writing", "best_for": "Emails, documents and messages, everywhere you type", "free": "Yes",
   "note": "A smooth everyday companion.",
   "body": "Grammarly works where you already write (browser, email, documents) to fix grammar, clarity and tone, and adds generative AI to draft and rewrite. It's the pick for improving everyday writing rather than producing marketing content.",
@@ -435,13 +441,14 @@ ARTICLES = [
 <li><strong>Several people writing for one brand?</strong> Jasper.</li>
 <li><strong>Sales outreach at scale?</strong> Copy.ai.</li>
 <li><strong>Blog traffic is the goal?</strong> Writesonic.</li>
+<li><strong>Solo, short texts, tight budget?</strong> Rytr.</li>
 <li><strong>You just want to write better emails and docs?</strong> Grammarly, or a general assistant.</li>
 <li><strong>Whatever you pick, fact-check.</strong> AI writing tools can state wrong facts confidently.</li>
 </ul>""",
 "faq": [
  ("Is a dedicated AI writing tool better than ChatGPT?", "For occasional writing, a general assistant is often enough. Dedicated tools pay off when you need brand voice, templates, SEO features or team workflows."),
  ("What is the best AI writing tool for SEO?", "Writesonic is built around SEO content, with research and optimization features aimed at ranking articles."),
- ("Is there a free AI writing tool?", "Grammarly and Copy.ai offer free plans; Jasper offers a free trial."),
+ ("Is there a free AI writing tool?", "Grammarly, Copy.ai and Rytr offer free plans (Rytr's is capped at 10,000 characters a month, per Rytr); Jasper offers a free trial."),
 ],
 },
 # ---------------------------------------------------------------------------
